@@ -1,0 +1,60 @@
+@import '../setting/style.scss';
+
+
+
+
+.paragraph {
+
+    &--text {
+        padding: 125px 0px 0px 0px;
+
+    }
+
+    &--wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+
+    &--text__content {
+        & h6 {
+            font-size: 18px;
+            font-weight: 300;
+            color: color(color-primary);
+            line-height: 1.5;
+            margin: 25px 0;
+            font-family: "Poppins,sans-serif";
+            flex-wrap: wrap;
+            padding: 0 18%;
+        }
+
+        & h2 {
+            font-size: 38px;
+        }
+    }
+
+    &--divier {
+        text-align: center;
+        margin: -21px 0px 0px 0px;
+        width: 100%;
+    }
+
+    &--divider__separator {
+        width: 58px;
+        margin: 16px auto;
+        border-bottom: 2px solid color(border-bottom);
+        display: block;
+    }
+
+
+    .product--list {
+        & i {
+            color: color(color-button);
+            font-size: 12px;
+        }
+    }
+}
