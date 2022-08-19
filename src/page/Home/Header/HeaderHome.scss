@@ -40,23 +40,26 @@
         justify-content: flex-end;
         align-items: center;
         flex-basis: 33%;
-        font-size: 14px;
+        font-size: 13px;
 
+        & span {
+            margin-right: 4px;
+            font-weight: 600;
+
+        }
         &__wishlist {
             margin-right: 12px;
             font-weight: 600;
         }
 
-        &__login {
+        &__login.lock {
             font-weight: 600;
+            font-size: 16px;
+           .lnr-lock {
+            margin-right: 6px;
 
-            & span:first-child {
-                margin-right: 8px;
-                font-size: 18px;
-            }
+           }
         }
-
-
         &__wishlist:hover,
         &__login:hover {
             cursor: pointer;

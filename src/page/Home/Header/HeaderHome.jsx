@@ -1,5 +1,6 @@
 import "./HeaderHome.scss";
-
+import ModalPage from '../../../scss/component/ModalPage'
+import { green } from "@mui/material/colors";
 function HeaderHome() {
   return (
     <div className="home--header">
@@ -42,10 +43,12 @@ function HeaderHome() {
           <span className="lnr lnr-heart" />
           <span className="header--text">Wishlist (0)</span>
         </div>
-        <div className="home--header__right__login">
-          <span className="lnr lnr-lock" />
-          <span className="header--text">Login</span>
-        </div>
+        <ModalPage 
+        sx={{
+         color: green,
+         fontSize: "14px",
+        }}
+        />
       </div>
     </div>
   );

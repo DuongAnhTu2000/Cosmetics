@@ -1,5 +1,5 @@
 import "./MainCart.scss";
-import Button from "../../scss/component/Button";
+import ButtonType from "../../scss/component/ButtonType";
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ function MainCart() {
         </div>
       </div>
       <Link to="/shop">
-      <Button type="button" title={title.button} />
+      <ButtonType type="button" title={title.button} />
       </Link>
     </div>
   );

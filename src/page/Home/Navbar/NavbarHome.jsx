@@ -6,7 +6,7 @@ function NavbarHome() {
     <div className="navbar--home">
       <div className="navbar--home__icon">
         <Link itemProp="url" to="/">
-          <img src={require("../../assets/image/logo.png")} alt="logo" />
+          <img src={("https://sante.qodeinteractive.com/wp-content/uploads/2020/09/logo-big.png")} alt="logo" />
         </Link>
       </div>
 

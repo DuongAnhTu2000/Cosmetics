@@ -1,0 +1,109 @@
+@import '../../scss/setting/style.scss';
+
+.main--detail {
+    padding: 68px 0 75px 0;
+    margin-left: 110px;
+    margin-right: auto;
+
+    .product--galery {
+        display: flex;
+        gap: 14px;
+
+        &__wrap {
+            width: 18%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 14px;
+            cursor: pointer;
+
+        }
+
+    }
+
+    .product--summary {
+        text-align: left;
+        font-family: "Montserrat", sans-serif;
+
+        & h2 {
+            font-weight: 600;
+            font-size: 38px;
+            color: color(text-title);
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: 600;
+
+        }
+
+        .text-description {
+            margin-top: 33px;
+
+            & p {
+                color: color(color-primary);
+                font-weight: 300;
+                font-size: 14px;
+                font-family: "Poppins", sans-serif;
+            }
+        }
+
+        .btn--number {
+            display: flex;
+
+            &__quantity {
+                margin-right: 18px;
+            }
+
+            .button--cart {
+                color: #68745c;
+
+                font-size: 15px;
+                font-weight: 600;
+                padding: 14px 38px;
+                ;
+                text-align: center;
+                border: 1px solid transparent;
+                transition: ease-in-out all 0.3s;
+
+                &:hover {
+                    background-color: transparent;
+                    transition: ease-in-out all 0.3s;
+                    border: 1px solid color(border-color-button);
+                }
+            }
+        }
+
+        .wishlist {
+            margin-top: 14px;
+            color: color(color-button);
+            transition: ease-in-out all 0.3s;
+
+            & i {
+                margin-right: 8px;
+            }
+
+            &:hover {
+                color: color(color-pseudo);
+                cursor: pointer;
+            }
+        }
+
+        .product-description {
+            margin-top: 20px;
+            color: color(color-primary);
+            font-family: "Poppins", sans-serif;
+
+            & a {
+                text-decoration: none;
+                transition: ease-in-out all 0.3s;
+                color: color(color-primary);
+                margin-left: 2px;
+
+                &:hover {
+                    color: color(color-pseudo);
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import './Swiper.scss'
-// Import Swiper styles
+import "./Swiper.scss";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 
 function SwiperJs() {
   return (
@@ -30,51 +30,50 @@ function SwiperJs() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="swiper-slide">
-            <span className="swiper-slide-tag">Sale</span>
-            <div className="swiper-slide-product">
-              <img
-                src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-1-img-1.jpg"
-                alt=""
-              />
-              <div className="swiper-product">
-                <div className="swiper-product-left">
-                  <div className="swiper-product-categories">
-                    <h5 itemProp="name" className="swiper-product-title">
-                      <a
-                        itemProp="url"
-                        className="swiper-product-link"
-                        href="https://sante.qodeinteractive.com/product/coco-skies/"
-                      >
-                        Green Pack
-                      </a>
-                    </h5>
-                    <a
-                      href="https://sante.qodeinteractive.com/product-category/body-care/"
-                      rel="tag"
-                    >
-                      Cosmetics
-                    </a>
+            <div className="swiper-slide">
+              <span className="swiper-slide-tag">Sale</span>
+              <div className="swiper-slide-product">
+              <Link to="/detail">
+                <img
+                  src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-1-img-1.jpg"
+                  alt=""
+                />
+                <div className="swiper-product">
+                  <div className="swiper-product-left">
+                    <div className="swiper-product-categories">
+                      <h5 itemProp="name" className="swiper-product-title">
+                        <Link
+                          itemProp="url"
+                          className="swiper-product-link"
+                          to="/detail"
+                        >
+                          Green Pack
+                        </Link>
+                      </h5>
+                      <Link to="/detail" rel="tag">
+                        Cosmetics
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="swiper-product-right">
-                  <div className="swiper-product-amount">
-                    <div className="swiper-product-price">
-                      <span
-                        className="swiper-product-price-discount"
-                        style={{ color: "#80827e" }}
-                      >
-                        $120.00
-                      </span>
-                      <span className="swiper-product-Listed price">
-                        $95.00
-                      </span>
+                  <div className="swiper-product-right">
+                    <div className="swiper-product-amount">
+                      <div className="swiper-product-price">
+                        <span
+                          className="swiper-product-price-discount"
+                          style={{ color: "#80827e" }}
+                        >
+                          $120.00
+                        </span>
+                        <span className="swiper-product-Listed price">
+                          $95.00
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             </div>
-          </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="swiper-slide">
@@ -88,20 +87,17 @@ function SwiperJs() {
                 <div className="swiper-product-left">
                   <div className="swiper-product-categories">
                     <h5 itemProp="name" className="swiper-product-title">
-                      <a
+                      <Link
                         itemProp="url"
                         className="swiper-product-link"
-                        href="https://sante.qodeinteractive.com/product/coco-skies/"
+                        to="/detail"
                       >
                         Coco Skies
-                      </a>
+                      </Link>
                     </h5>
-                    <a
-                      href="https://sante.qodeinteractive.com/product-category/body-care/"
-                      rel="tag"
-                    >
+                    <Link to="/detail" rel="tag">
                       Body Care
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="swiper-product-right">

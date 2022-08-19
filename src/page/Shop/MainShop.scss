@@ -12,8 +12,29 @@
         background-color: none !important;
         padding: -8px !important;
 
-        & select {
-            border: none;
+        .filter--option {
+            position: relative;
+            width: 231px;
+
+            & select {
+                border: none;
+                border-bottom: 1px solid color(line-pseudo);
+                color: color(text-option);
+                font-family: "Poppins", sans-serif;
+                display: block;
+
+                & option {
+                    color: color(text-list-category);
+                    background-color: color(background-body);
+                    margin-bottom: 4px;
+                    display: block;
+
+                    &:hover {
+                        background-color: color(background-body);
+                        color: color(color-pseudo);
+                    }
+                }
+            }
         }
     }
 
@@ -27,6 +48,11 @@
             font-weight: 600;
             color: color(text-title);
             margin-bottom: 10px;
+        }
+
+        .MuiSlider-thumb {
+            width: 8px;
+            height: 8px;
         }
 
         .price--label {

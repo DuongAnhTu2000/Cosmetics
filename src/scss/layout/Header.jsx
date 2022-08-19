@@ -1,17 +1,10 @@
 import "./Header.scss";
-// import ModalPage from '../component/Modal'
+import ModalPage from '../component/ModalPage';
 import { Link } from "react-router-dom";
 import { ReactComponent as Cart } from "../../page/assets/svg/Cart.svg";
 import { ReactComponent as Option } from "../../page/assets/svg/Option.svg";
-import React from 'react';
-
-import { useState } from 'react';
 function Header() {
-  const [visible, setVisible] = useState(false);
-  const handleLogin = () => {
-    setVisible(true)
-    
-  }
+
   return (
     <div className="header--container">
       <div className="header--container__left">
@@ -44,10 +37,7 @@ function Header() {
         </Link>
       </div>
       <div className="header--container__right">
-        <div className="home--header__right__login" onClick={handleLogin}>
-          <span className="lnr lnr-lock" />
-          <span className="header--text" >Login</span>
-        </div>
+        <ModalPage  />
         <div className="navbar--home__menu">
           <div className="cart">
             <Link itemProp="url" to="/cart">

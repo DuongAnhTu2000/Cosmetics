@@ -20,6 +20,7 @@
             
             & span {
                 margin: 0 8px 18px 0;
+                color: color(color-primary);
 
             }
             & h4 {
@@ -28,11 +29,17 @@
 
             & p {
                 color: color(color-primary);
-
+                margin-bottom: 10%;
             }
 
             &__item {
-                padding-right: 24%;
+                padding-right: 21%;
+
+                & span  {
+                    &.icon {
+                        color: color(footer-icon);
+                    }
+                }
             }
 
             & a {

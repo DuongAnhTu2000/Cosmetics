@@ -6,11 +6,11 @@ function Footer() {
         <div className="Footer--top">
           <div className="Footer--top__item">
             <h4>About us</h4>
-            <p>
+            <span>
               Your nature-inspired supplier of all-organic and fresh produce for
               all your daily needs. We offer skin treatments, nutrition advisory
               and more.
-            </p>
+            </span>
           </div>
           <div className="Footer--top__item">
             <h4>Contact us</h4>
@@ -21,13 +21,13 @@ function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span className="lnr lnr-apartment" />
+                <span className="lnr lnr-apartment icon" />
                 <span>27 Rue du Aire 60000 Tillé, France</span>
               </a>
             </div>
             <div>
               <a itemProp="url" href="tel:0058955668856944" target="_self">
-                <span className="lnr lnr-phone" />
+                <span className="lnr lnr-phone icon" />
                 <span className="qodef-e-title-text">+589 55668 8569 44</span>
               </a>
             </div>
@@ -37,7 +37,7 @@ function Footer() {
                 href="mailto:sante@qodeinteractive.com"
                 target="_self"
               >
-                <span className="lnr lnr-envelope" />
+                <span className="lnr lnr-envelope icon" />
                 <span className="qodef-e-title-text">
                   sante@qodeinteractive.com
                 </span>
@@ -52,7 +52,7 @@ function Footer() {
                 href="https://sante.qodeinteractive.com/my-account/"
                 target="_self"
               >
-                <span className="lnr lnr-user" />
+                <span className="lnr lnr-user icon" />
                 <span className="qodef-e-title-text">My account</span>
               </a>
             </div>
@@ -62,7 +62,7 @@ function Footer() {
                 href="https://sante.qodeinteractive.com/checkout/"
                 target="_self"
               >
-                <span className="lnr lnr-tag" />
+                <span className="lnr lnr-tag icon" />
                 <span className="qodef-e-title-text">Checkout</span>
               </a>
             </div>
@@ -72,20 +72,20 @@ function Footer() {
                 href="https://sante.qodeinteractive.com/wishlist/"
                 target="_self"
               >
-                <span className="lnr lnr-eye" />
+                <span className="lnr lnr-eye icon" />
                 <span className="qodef-e-title-text">Wishlist</span>
               </a>
             </div>
           </div>
-          <div className="Footer--top__item--4">
+          <div className="Footer--top__item">
             <h4>Payment</h4>
             <p>
-              <span style={{ paddingRight: "13%", display: "inline-block" }}>
+              <span >
                 Alienum phaedrum torquatos nec eu, detr periculis ex, nihil
                 expet.
               </span>
             </p>
-            <img src={require("../../page/assets/image/payment.png")} alt="" />
+            <img src={("https://sante.qodeinteractive.com/wp-content/uploads/2020/09/futer-img-1.png")}  alt="" />
           </div>
         </div>
         <div className="Footer--bottom">

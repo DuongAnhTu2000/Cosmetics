@@ -1,4 +1,4 @@
-import "./MainProduct.scss";
+import "./MainShop.scss";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -6,8 +6,13 @@ import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { createTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -21,7 +26,27 @@ const theme = createTheme({
     color: "#68745c",
   },
 });
+const minDistance = 0;
+
 function MainProduct(title) {
+  const [value, setValue1] = useState([0, 150]);
+  const [age, setAge] = useState("");
+
+  const handleOption = (event) => {
+    setAge(event.target.value);
+  };
+  const handleChange = (event, newValue, activeThumb) => {
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+
+    if (activeThumb === 0) {
+      setValue1([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+    } else {
+      setValue1([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+    }
+  };
+
   return (
     <div className="main--product">
       <Box sx={{ flexGrow: 1 }}>
@@ -30,28 +55,32 @@ function MainProduct(title) {
             <Item>
               <div className="main--product__result">
                 <p>Showing 1–9 of 86 results</p>
-                <form className="" method="get">
-                  <select
-                    name="orderby"
-                    className="orderby select2-hidden-accessible"
-                    defaultValue="DEFAULT"
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 230 }}
+                >
+                  <InputLabel id="demo-simple-select-standard-label"
+                  disableAnimation={false}
+                  sx={{
+                    // borderBottom: "1px solid #e0e0e0",
+                  }}
                   >
-                    <option defaultValue="menu_order">Default sorting</option>
-                    <option defaultValue="popularity">
-                      Sort by popularity
-                    </option>
-                    <option defaultValue="rating">
-                      Sort by average rating
-                    </option>
-                    <option defaultValue="date">Sort by latest</option>
-                    <option defaultValue="price">
-                      Sort by price: low to high
-                    </option>
-                    <option defaultValue="price-desc">
-                      Sort by price: high to low
-                    </option>
-                  </select>
-                </form>
+                    Default sorting
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    value={age}
+                    onChange={handleOption}
+                    label="Age"
+                   
+                  >
+                    <MenuItem value={10}>Default sorting</MenuItem>
+                    <MenuItem value={10}>Sort by popularity</MenuItem>
+                    <MenuItem value={20}>Sort by average rating</MenuItem>
+                    <MenuItem value={30}>Sort by latest</MenuItem>
+                    <MenuItem value={30}>Sort by price: low to high</MenuItem>
+                    <MenuItem value={30}>Sort by price: high to low</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </Item>
             <Item>
@@ -70,7 +99,9 @@ function MainProduct(title) {
               <div className="price--filter">
                 <h4>Price Filter</h4>
                 <Slider
-                  defaultValue={0}
+                  value={value}
+                  onChange={handleChange}
+                  disableSwap
                   step={10}
                   size="small"
                   min={0}
@@ -78,7 +109,7 @@ function MainProduct(title) {
                   sx={{
                     width: "110%",
                     color: "#68745c",
-                    height: "2px",
+                    height: "1px",
                     padding: "15px 0",
                   }}
                 />
@@ -89,8 +120,9 @@ function MainProduct(title) {
                   <button type="button">Filter</button>
                 </div>
                 <div className="widget--products">
-                  <h4>Featured MainProducts</h4>
+                  <h4>Featured Products</h4>
                   <ul className="widget--products__list">
+                    
                     <li className="widget--products__list__item">
                       <a href="https://sante.qodeinteractive.com/product/coco-skies/">
                         <img
@@ -204,25 +236,13 @@ function MainProduct(title) {
                 <div className="widget--social">
                   <h4>Follow us</h4>
                   <ul>
-                    <Link
-                      itemProp="url"
-                      to="/#"
-                      rel="noreferrer"
-                    >
+                    <Link itemProp="url" to="/#" rel="noreferrer">
                       <i className="fa-brands fa-facebook-f header--left__icon" />
                     </Link>
-                    <Link
-                      itemProp="url"
-                      to="/#"
-                      rel="noreferrer"
-                    >
+                    <Link itemProp="url" to="/#" rel="noreferrer">
                       <i className="fa-brands fa-twitter header--left__icon" />
                     </Link>
-                    <Link
-                      itemProp="url"
-                      to="/#"
-                      rel="noreferrer"
-                    >
+                    <Link itemProp="url" to="/#" rel="noreferrer">
                       <i className="fa-brands fa-instagram header--left__icon" />
                     </Link>
                   </ul>
