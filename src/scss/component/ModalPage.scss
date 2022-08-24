@@ -110,10 +110,14 @@
 
 
 .MuiButtonBase-root.tab--style {
-        padding: 14px 42px ;
-        background-color: #f7f7f7;
-
-        &:hover {
-            color:color(color-pseudo);
-        }
+    padding:16px 0;
+    background-color: #f7f7f7;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    text-transform: capitalize;
+    font-size: 16px;
+    
+    &:hover {
+        color: color(color-pseudo);
+    }
 }

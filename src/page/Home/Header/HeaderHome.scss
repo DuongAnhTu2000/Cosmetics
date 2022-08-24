@@ -33,6 +33,11 @@
         justify-content: space-around;
         font-weight: 600;
         align-items: center;
+
+        & a {
+            color: color(color-pseudo);
+
+        }
     }
 
     &__right {
@@ -45,25 +50,34 @@
         & span {
             margin-right: 4px;
             font-weight: 600;
-
         }
+
         &__wishlist {
             margin-right: 12px;
             font-weight: 600;
+            font-size: 15px;
         }
 
         &__login.lock {
             font-weight: 600;
             font-size: 16px;
-           .lnr-lock {
-            margin-right: 6px;
 
-           }
+            .lnr-lock {
+                margin-right: 6px;
+                font-weight: 600;
+            }
         }
+
         &__wishlist:hover,
         &__login:hover {
             cursor: pointer;
             color: color(color-pseudo);
         }
+
+        .btn--login {
+            color: color(color-header);
+
+        }
     }
+
 }

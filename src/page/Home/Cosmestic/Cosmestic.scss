@@ -68,37 +68,7 @@
 
                     & a {
                         color: color(color-button);
-                    }
-
-                    &__tags {
-                        position: relative;
-                        display: inline-block;
-                        vertical-align: top;
-                        color: currentColor;
-                        letter-spacing: .02em;
-
-                        & a {
-                            display: inline-block;
-                            margin-right: 4px;
-                            transition: color .2s ease-out;
-                            cursor: pointer;
-                            text-decoration: none;
-
-                            &:hover {
-                                display: flex;
-                                content: "";
-                                position: absolute;
-                                height: 1px;
-                                width: 100%;
-                                bottom: 4px;
-                                left: 0;
-                                background-color: #969d8f;
-                                -webkit-transform: scaleX(1);
-                                -ms-transform: scaleX(1);
-                                transform: scaleX(1);
-                            }
-                        }
-
+                        margin-right: 6px;
                     }
                 }
 

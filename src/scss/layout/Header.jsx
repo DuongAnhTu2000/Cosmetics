@@ -8,16 +8,16 @@ function Header() {
   return (
     <div className="header--container">
       <div className="header--container__left">
-        <Link itemProp="url" rel="home" to="/">
+        <Link itemProp="url" rel="home" to="/home">
           <img
             src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/logo-home5-2.png"
-            alt="logo main"
-            itemProp="image"
+            alt="logo"
+            itemProp=""
           ></img>
         </Link>
       </div>
       <div className=".navbar--home__menu header--container__center">
-        <Link to="/">
+        <Link to="/home">
           <span className="navbar--home__menu__list">Home</span>
         </Link>
         <Link to="#">

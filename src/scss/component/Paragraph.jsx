@@ -9,7 +9,7 @@ function Paragraph(props) {
             alt=""
           />
         </div>
-        <div className="paragraph--text__content">
+        <div className="paragraph--wrap__content ">
           <h2>{props.title}</h2>
           <h6>
             Alienum phaedrum torquatos nec eu, detr periculis ex, nihil

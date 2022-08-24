@@ -1,4 +1,5 @@
 import "./Cosmestic.scss";
+import { Link } from "react-router-dom";
 
 function Cosmetic() {
   return (
@@ -10,50 +11,41 @@ function Cosmetic() {
               src="https://sante.qodeinteractive.com/wp-content/uploads/2020/10/h1-blog-list-img-1.jpg"
               alt=""
             />
-            <div itemProp="dateCreated" className="tag--date">
-              <a
-                itemProp="url"
-                href="https://sante.qodeinteractive.com/2020/10/"
-              >
-                <span className="tag--date__month">Oct</span>
-                <span className="tag--date__date">9</span>
-                <span className="tag--date__year">2020</span>
-              </a>
-            </div>
+            
             <div className="Cosmetics--content">
               <div className="Cosmetics--content__categories">
-                <a
+                <Link
                   style={{ textDecoration: "none" }}
-                  href="https://sante.qodeinteractive.com/category/cosmetics/"
+                  to="/detail"
                   rel="category tag"
                 >
                   Cosmetics -
-                </a>
+                </Link>
               </div>
               <div className="Cosmetics--content__tags">
-                <a
-                  href="https://sante.qodeinteractive.com/tag/beauty/"
+                <Link
+                 to="/detail"
                   rel="tag"
                 >
                   Beauty
-                </a>
-                <a
-                  href="https://sante.qodeinteractive.com/tag/handmade/"
+                </Link>
+                <Link
+                to="/detail"
                   rel="tag"
                 >
                   Handmade
-                </a>
+                </Link>
               </div>
             </div>
             <div className="Cosmetics--text">
               <h4>
-                <a
+                <Link
                   style={{ textDecoration: "none" }}
                   itemProp="url"
-                  href="https://sante.qodeinteractive.com/cleansing-scrub/"
+                  to="/detail"
                 >
                   Cleansing scrub
-                </a>
+                </Link>
                 <p>
                   Alienum phaedrum torquatos nec eu, detr periculis ex, nihil
                   expetendis in mei. Mei an pericula euripidis. hinc partem ei
@@ -72,51 +64,41 @@ function Cosmetic() {
               src="https://sante.qodeinteractive.com/wp-content/uploads/2020/10/h1-blog-list-img-2.jpg"
               alt=""
             />
-            <div itemProp="dateCreated" className="tag--date">
-              <a
-                itemProp="url"
-                href="https://sante.qodeinteractive.com/2020/10/"
-              >
-                <span className="tag--date__month">Oct</span>
-                <span className="tag--date__date">9</span>
-                <span className="tag--date__year">2020</span>
-              </a>
-            </div>
+           
             <div className="Cosmetics--content">
               <div className="Cosmetics--content__categories">
-                <a
+                <Link
                   style={{ textDecoration: "none" }}
-                  href="https://sante.qodeinteractive.com/category/cosmetics/"
+                  to="/detail"
                   rel="category tag"
                 >
                   Cosmetics -
-                </a>
+                </Link>
               </div>
               <div className="Cosmetics--content__tags">
-                <a
-                  href="https://sante.qodeinteractive.com/tag/beauty/"
+                <Link
+                  to="/detail"
                   rel="tag"
                 >
-                  
                   Beauty
-                </a>
-                <a
-                  href="https://sante.qodeinteractive.com/tag/handmade/"
+                </Link>
+                <Link
+                  to="/detail"
                   rel="tag"
                 >
                   Handmade
-                </a>
+                </Link>
               </div>
             </div>
             <div className="Cosmetics--text">
               <h4>
-                <a
+                <Link
                   itemProp="url"
                   style={{ textDecoration: "none" }}
-                  href="https://sante.qodeinteractive.com/nourish-organic/"
+                 to="/detail"
                 >
                   Nourish organic
-                </a>
+                </Link>
                 <p itemProp="description">
                   Alienum phaedrum torquatos nec eu, detr periculis ex, nihil
                   expetendis in mei. Mei an pericula euripidis. hinc partem ei
@@ -135,50 +117,40 @@ function Cosmetic() {
               src="https://sante.qodeinteractive.com/wp-content/uploads/2020/10/h1-blog-list-img-3.jpg"
               alt=""
             />
-            <div itemProp="dateCreated" className="tag--date">
-              <a
-                itemProp="url"
-                href="https://sante.qodeinteractive.com/2020/10/"
-              >
-                <span className="tag--date__month">Oct</span>
-                <span className="tag--date__date">9</span>
-                <span className="tag--date__year">2020</span>
-              </a>
-            </div>
             <div className="Cosmetics--content">
               <div className="Cosmetics--content__categories">
-                <a
+                <Link
                   style={{ textDecoration: "none" }}
-                  href="https://sante.qodeinteractive.com/category/cosmetics/"
+                 to="/detail"
                   rel="category tag"
                 >
                   Cosmetics -
-                </a>
+                </Link>
               </div>
               <div className="Cosmetics--content__tags">
-                <a
-                  href="https://sante.qodeinteractive.com/tag/beauty/"
+                <Link
+                 to="/detail"
                   rel="tag"
                 >
                   Beauty
-                </a>
-                <a
-                  href="https://sante.qodeinteractive.com/tag/handmade/"
+                </Link>
+                <Link
+                  to="/detail"
                   rel="tag"
                 >
                   Handmade
-                </a>
+                </Link>
               </div>
             </div>
             <div className="Cosmetics--text">
               <h4>
-                <a
+                <Link
                   itemProp="url"
                   style={{ textDecoration: "none" }}
-                  href="https://sante.qodeinteractive.com/true-botanicals/"
+                 to="/detail"
                 >
                   True botanicals
-                </a>
+                </Link>
                 <p itemProp="description">
                   Alienum phaedrum torquatos nec eu, detr periculis ex, nihil
                   expetendis in mei. Mei an pericula euripidis. hinc partem ei

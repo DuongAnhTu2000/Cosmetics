@@ -1,6 +1,7 @@
 import Header from '../../scss/layout/Header';
 import BreadCrumb from '../../scss/layout/BreadCrumb';
 import MainCart from './MainCart';
+
 import Footer from '../../scss/layout/Footer';
 import React from 'react';
 import { useState } from 'react';

@@ -7,17 +7,17 @@ function SliderJS() {
       id="carouselExampleFade"
       className="carousel slide carousel-fade"
       data-bs-ride="carousel"
-      data-bs-interval={3000}
+      data-bs-interval={300000}
     >
       <div className="carousel-inner slider carousel--content ">
         <div className="carousel-item active ">
           <img
-            src={require("../../assets/image/slider.jpg")}
+            src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/h1-rev-background-1.jpg"
             className="d-block w-100"
             alt="..."
           />
           <div className="carousel-caption d-none d-md-block carousel--content__1">
-            <img src="./assets/image/leaf-white.png" alt="" />
+            <img src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/h1-rev-img-1.png" alt="leaf" />
             <h5>Natural Skin</h5>
             <p>Organic &amp; vegan cosmetics</p>
             <Link to="/shop">
@@ -29,7 +29,7 @@ function SliderJS() {
         </div>
         <div className="carousel-item ">
           <img
-            src={require("../../assets/image/slider2.jpg")}
+            src="https://sante.qodeinteractive.com/wp-content/uploads/2020/11/h1-rev-background-2.jpg"
             className="d-block w-100"
             alt="..."
           />
@@ -40,7 +40,7 @@ function SliderJS() {
         </div>
         <div className="carousel-item ">
           <img
-            src={require("../../assets/image/slider3.jpg")}
+            src="https://sante.qodeinteractive.com/wp-content/uploads/2020/11/h1-rev-background-3.jpg"
             className="d-block w-100"
             alt="..."
           />

@@ -1,54 +1,48 @@
 import "./HeaderHome.scss";
 import ModalPage from '../../../scss/component/ModalPage'
-import { green } from "@mui/material/colors";
+import { Link } from "react-router-dom";
+
 function HeaderHome() {
   return (
     <div className="home--header">
       <div className="home--header__left">
-        <a
+        <Link
           itemProp="url"
-          href="https://www.facebook.com/QodeInteractive/"
+         to="/home"
           target="_blank"
           rel="noreferrer"
         >
           <i className="fa-brands fa-facebook-f" />
-        </a>
-        <a
+        </Link>
+        <Link
           itemProp="url"
-          href="https://twitter.com/QodeInteractive"
+          to="/home"
           target="_blank"
           rel="noreferrer"
         >
           <i className="fa-brands fa-twitter" />
-        </a>
-        <a
+        </Link>
+        <Link
           itemProp="url"
-          href="https://www.instagram.com/qodeinteractive/"
+         to="/home"
           target="_blank"
           rel="noreferrer"
         >
           <i className="fa-brands fa-instagram"></i>
-        </a>
+        </Link>
       </div>
       <div className="home--header__center">
         <span>Free deliveries worldwide! For more info click &nbsp; </span>
-        <a href="https://sante.qodeinteractive.com/contact-us/">
-          <span style={{ textDecoration: "underline", color: "#1a1d1f" }}>
-            Here
-          </span>
-        </a>
+        <Link to="/home">
+          <span>Here</span>
+        </Link>
       </div>
       <div className="home--header__right">
         <div className="home--header__right__wishlist">
           <span className="lnr lnr-heart" />
           <span className="header--text">Wishlist (0)</span>
         </div>
-        <ModalPage 
-        sx={{
-         color: green,
-         fontSize: "14px",
-        }}
-        />
+        <ModalPage className="btn--login" />
       </div>
     </div>
   );

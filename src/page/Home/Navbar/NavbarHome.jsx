@@ -5,13 +5,13 @@ function NavbarHome() {
   return (
     <div className="navbar--home">
       <div className="navbar--home__icon">
-        <Link itemProp="url" to="/">
+        <Link itemProp="url" to="/home">
           <img src={("https://sante.qodeinteractive.com/wp-content/uploads/2020/09/logo-big.png")} alt="logo" />
         </Link>
       </div>
 
       <div className="navbar--home__menu">
-        <Link to="/">
+        <Link to="/home">
           <span className="navbar--home__menu__list">Home</span>
         </Link>
         <Link to="/#">

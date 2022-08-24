@@ -5,7 +5,7 @@ import Swiper from "./Swiper/Swiper";
 import Categories from "../../scss/layout/Categories";
 import Introduction from "./Introduction/Introduction";
 import Paragraph from "../../scss/component/Paragraph";
-import GridProduct from "../../scss/layout/GridProduct";
+import GridProduct from "./GridProduct";
 import SlideParagraph from "./SlideParagraph/SlideParagraph";
 import Banner from "./Banner/Banner";
 import Cosmetic from "./Cosmestic/Cosmestic";
@@ -18,7 +18,6 @@ function Home() {
   const [title] = useState({
     title1: "All for your online store",
     title2: "Premium skincare",
-    
   });
 
   return (

@@ -1,7 +1,6 @@
 @import '../../../scss/setting/style.scss';
 
 
-
 .slider {
     width: 100%;
     height: auto;
@@ -17,13 +16,9 @@
 }
 
 .carousel--content {
-    // flex-direction: column;
-    // gap: 12px;
+
     color: color(text-color);
 
-    & img {
-        height: auto;
-    }
 
     & h5 {
         font-family: 'Quentin',sans-serif;
@@ -37,7 +32,15 @@
 
     &__1 {
         top: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
 
+        & img {
+            margin-left: auto;
+            margin-right: auto;
+        }
         & h5 {
             font-size: 152px;
         }

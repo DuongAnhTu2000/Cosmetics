@@ -9,7 +9,6 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-// import ButtonType from '../component/ButtonType';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./ModalPage.scss";
 import { Link } from "react-router-dom";
@@ -25,10 +24,10 @@ const style = {
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#323528",
+      main: "#2f3327",
     },
   },
-})
+});
 
 function ModalPage() {
   const [open, setOpen] = useState(false);
@@ -44,13 +43,17 @@ function ModalPage() {
     <ThemeProvider theme={theme}>
       <Button
         onClick={handleOpen}
-        color="primary"
+        disableRipple={true}
         sx={{
           textTransform: "none",
           padding: "0",
+          "&:hover": {
+            background: "transparent",
+          },
         }}
+        className="btn--login"
       >
-        <div className="home--header__right__login lock">
+        <div className="home--header__right__login lock ">
           <span className="lnr lnr-lock " />
           <span className="header--text">Login</span>
         </div>
@@ -63,29 +66,33 @@ function ModalPage() {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 1000,
+          timeout: 500,
         }}
       >
         <Fade in={open}>
           <Box sx={style}>
             <TabContext value={value}>
               <Box>
-                <TabList
-                  onChange={handleChange}
-                  variant="fullWidth"
-                >
-                  <Tab label="Login" value="1" className="tab--style" />
+                <TabList onChange={handleChange} variant="fullWidth">
+                  <Tab
+                    label="Login"
+                    value="1"
+                    className="tab--style"
+                    disableRipple={true}
+                  />
                   <Tab
                     label="Register"
                     value="2"
                     to="/register"
                     className="tab--style"
+                    disableRipple={true}
                   />
                   <Tab
                     label="Reset Pass"
                     value="3"
                     to="/reset-password"
                     className="tab--style"
+                    disableRipple={true}
                   />
                 </TabList>
               </Box>
@@ -122,13 +129,15 @@ function ModalPage() {
                         Remember me
                       </span>
                     </div>
-                    <Link to="/#" className="forgot--password">
+                    <Link to="/reset-password" className="forgot--password">
                       Lost Your password?
                     </Link>
                   </div>
+                  <Link to="/admin">
                   <button type="button" className="button--style button--modal">
                     Login
                   </button>
+                  </Link>
                   <div className="modal--link">
                     <div className="modal--link__remember">
                       <span htmlFor="remember" className="text--remember">
@@ -186,9 +195,6 @@ function ModalPage() {
                       address. You will receive a link to create a new password
                       via email.
                     </label>
-                     {/* <h className="modal-text">Lost your password? Please enter your username or email
-                      address. You will receive a link to create a new password
-                      via email</h> */}
                   </div>
                   <div className="modal--input">
                     <input
@@ -203,27 +209,6 @@ function ModalPage() {
                     Reset Password
                   </button>
                 </TabPanel>
-                {/* <TabPanel value="3">
-                  <div className="modal--title">
-                    <label>
-                      Lost your password? Please enter your username or email
-                      address. You will receive a link to create a new password
-                      via email.
-                    </label>
-                  </div>
-                  <div className="modal--input">
-                    <input
-                      type="text"
-                      name="user_email"
-                      size={37}
-                      aria-required="true"
-                      placeholder="User Name or Email*"
-                    />
-                  </div>
-                  <button type="button" className="button--style button--modal">
-                    Reset Password
-                  </button>
-                </TabPanel> */}
               </div>
             </TabContext>
           </Box>

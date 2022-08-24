@@ -43,35 +43,3 @@
     }
 }
 
-// .line--style {
-//     position: relative;
-//     z-index: 2;
-
-//     &:after {
-//         content: "";
-//                 height: 14px;
-//                 background: color(background-button-hover);
-//                 display: block;
-//                 position: absolute;
-//                 z-index: 0;
-//                 left: -8px;
-//                 transform: scaleX(0);
-//                 transform-origin: right;
-//                 transition: transform 0.3s;
-//     }
-
-//     &:hover:after {
-//         content: "";
-//                 width: 130%;
-//                 height: 14px;
-//                 background: color(background-button-hover);
-//                 display: block;
-//                 position: absolute;
-//                 top: 50%;
-//                 z-index: -1;
-//                 left: -8px;
-//                 transform: scaleX(1);
-//                 transform-origin: left;
-//                 transition: transform 0.3s;
-//     }
-// }

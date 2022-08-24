@@ -1,4 +1,4 @@
-import './ButtonType.scss';
+import './ButtonStyle.scss';
 
 function ButtonType(props) {
     return ( 

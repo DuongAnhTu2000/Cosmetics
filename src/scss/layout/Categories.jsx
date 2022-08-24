@@ -1,13 +1,14 @@
 import "./Categories.scss";
+import { Link } from "react-router-dom";
 
 function Categories() {
   return (
     <div className="product--categories">
         <div className="product--categories__row">
           <div className="product--container__row__col">
-            <a
+            <Link
               itemProp="url"
-              href="https://sante.qodeinteractive.com/product-category/natural/"
+               to="/home"
               target="_self"
             >
               <div className="product--image">
@@ -17,12 +18,12 @@ function Categories() {
                 <h3>Organic</h3>
                 <h4>Natural</h4>
               </div>
-            </a>
+            </Link>
           </div>
           <div className="product--container__col">
-            <a
+            <Link
               itemProp="url"
-              href="https://sante.qodeinteractive.com/product-category/body-care/"
+              to="/home"
               target="_self"
             >
               <div className="product--image">
@@ -32,12 +33,12 @@ function Categories() {
                 <h3>Scrub</h3>
                 <h4>Body Care</h4>
               </div>
-            </a>
+            </Link>
           </div>
           <div className="product--container__col">
-            <a
+            <Link
               itemProp="url"
-              href="https://sante.qodeinteractive.com/product-category/selfcare/"
+              to="/home"
               target="_self"
             >
               <div className="product--image">
@@ -47,7 +48,7 @@ function Categories() {
                 <h3>Creamy</h3>
                 <h4>Selfcare</h4>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
     </div>

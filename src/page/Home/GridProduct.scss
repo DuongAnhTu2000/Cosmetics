@@ -1,4 +1,4 @@
-@import '../setting/style.scss';
+@import '../../scss/setting/style.scss';
 
 
 .grid--container {
@@ -16,19 +16,21 @@
             cursor: pointer;
             padding: 0 5px;
             margin: 0 0 10px;
-        }
+        
 
-        &__item img {
+        & img {
             width: 100%;
             height: 70%;
             object-fit: cover;
         }
-
+    }
         &__content {
             padding: 23px 0 13px;
 
             & h5 {
                 margin: 8px 0;
+                color: color(color-product);
+                
             }
 
             & h6 {
