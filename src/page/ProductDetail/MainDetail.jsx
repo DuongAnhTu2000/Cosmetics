@@ -1,65 +1,94 @@
-import "./MainDetail.scss";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Backdrop from "@mui/material/Backdrop";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Lazy, Pagination, Navigation } from "swiper";
-import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-
+import './MainDetail.scss';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Backdrop from '@mui/material/Backdrop';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Lazy, Pagination, Navigation } from 'swiper';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {addtoCart} from "../../redux/cartSlice";
+import { useDispatch, useSelector } from 'react-redux';
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/lazy";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import 'swiper/css';
+import 'swiper/css/lazy';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: 400,
   opacity: 0.4,
 };
 const Item = styled(Paper)(() => ({
-  textAlign: "center",
-  padding: "1px",
-  boxShadow: "none",
+  textAlign: 'center',
+  padding: '1px',
+  boxShadow: 'none',
 }));
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#80827e",
+      main: '#80827e',
     },
   },
 });
 function MainDetail() {
+  
   const [open, setOpen] = useState(false);
   // const [hover, setHover] = useState(false);
-  const [value, setValue] = useState("1");
+  const [count, setCount] = useState(1);
+  const [value, setValue] = useState('1');
   let navigate = useNavigate();
   const [title] = useState({
-    title: "Submit",
+    title: 'Submit',
   });
+  const product = [
+    {
+      "image": "https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-2-img-1-300x441.jpg",
+      "name": "Coco Skies",
+      "price": "78.00",
+      "categories": "Body Care",
+      "description": "cleanser",
+      "id": "1"
+     }
+     
+  ]
+
+  const dispatch = useDispatch();
   
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    const newItem = {
+      product,
+      count,
+    };
+    dispatch(addtoCart(newItem));
+    console.log("them san pham ", newItem);
+  }
+
+
   function handleClick() {
     navigate('/detail');
-  };
+  }
+
   const handleHover = (e) => {
     // setHover()
   };
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleChange = (newValue) => {
@@ -75,7 +104,7 @@ function MainDetail() {
               <Item>
                 <div className="product--galery">
                   <div className="product--galery__wrap">
-                  <div className="product--galery__img">
+                    <div className="product--galery__img">
                       <img
                         src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-4-gallery-1-300x441.jpg"
                         alt=""
@@ -132,8 +161,8 @@ function MainDetail() {
                     <Box sx={style}>
                       <Swiper
                         style={{
-                          "--swiper-navigation-color": "#fff",
-                          "--swiper-pagination-color": "#fff",
+                          '--swiper-navigation-color': '#fff',
+                          '--swiper-pagination-color': '#fff',
                         }}
                         lazy={true}
                         loop={true}
@@ -196,33 +225,41 @@ function MainDetail() {
                   <p className="price">
                     <span className="amount">$35.00</span>
                   </p>
-                  <div className="text-description">
+                  <div className="text--description">
                     <p>
-                      Quem tota utroque mea ea, nam blandit disputando te, sale
-                      volutpat pri in. Mutat eleifend per ut, has ut nusquam
-                      accumsan mnesarchum. Solum reque signiferumque ius ea. In
-                      primis eripuit menandri his, usu modus munere at eos.
+                      Quem tota utroque mea ea, nam blandit disputando te, sale volutpat pri in. Mutat eleifend per ut,
+                      has ut nusquam accumsan mnesarchum. Solum reque signiferumque ius ea. In primis eripuit menandri
+                      his, usu modus munere at eos.
                     </p>
                   </div>
-                  <form className="btn--number" method="post">
-                    <div className="btn--number__quantity">
-                      <input type="button" defaultValue="-" />
+                  <form className="btn--number">
+                    <div className="quantity--button">
                       <input
-                        aria-label="quantity"
-                        max="10"
-                        min="1"
-                        name=""
-                        type="number"
-                        defaultValue="1"
-                      />
-                      <input type="button" defaultValue="+" />
+                        type="text"
+                        name="quantity"
+                        value={count}
+                        size="4"
+                        placeholder=""
+                        className="input--text"
+                      ></input>
+                      <span
+                        className="quantity--plus"
+                        onClick={() => {
+                          setCount(Math.max(count - 1, 1));
+                        }}
+                      >
+                        <span className="lnr lnr-chevron-down"></span>
+                      </span>
+                      <span
+                        className="quantity--minus"
+                        onClick={() => {
+                          setCount(count + 1);
+                        }}
+                      >
+                        <span className="lnr lnr-chevron-up"></span>
+                      </span>
                     </div>
-                    <button
-                      type="submit"
-                      name="add-to-cart"
-                      defaultValue=""
-                      className="button--cart"
-                    >
+                    <button name="add-to-cart" className="button--cart" onClick={handleAddToCart}>
                       Add to cart
                     </button>
                   </form>
@@ -258,42 +295,20 @@ function MainDetail() {
 
             <div className="tabs--container">
               <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                  <TabList
-                    onChange={handleChange}
-                    aria-label="lab API tabs example"
-                  >
-                    <Tab
-                      label="Description"
-                      value="1"
-                      className="tabs--list"
-                      disableRipple={true}
-                    />
-                    <Tab
-                      label="Additional information"
-                      value="2"
-                      className="tabs--list"
-                      disableRipple={true}
-                    />
-                    <Tab
-                      label="Reviews (0)"
-                      value="3"
-                      className="tabs--list"
-                      disableRipple={true}
-                    />
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                  <TabList onChange={handleChange} aria-label="lab API tabs example">
+                    <Tab label="Description" value="1" className="tabs--list" disableRipple={true} />
+                    <Tab label="Additional information" value="2" className="tabs--list" disableRipple={true} />
+                    <Tab label="Reviews (0)" value="3" className="tabs--list" disableRipple={true} />
                   </TabList>
                 </Box>
                 <TabPanel value="1" className="tab--content">
-                  Lorem ipsum dolor sit amet, ad duo ubique dicunt, et commune
-                  sensibus eam, at vix omnis fe ugiat sca evola. Has princip es
-                  ap pella tur ut, ne has sonet elitr latine, an quo summo
-                  munere. Suscipit adipiscing vis in, an vim pla tonem sa
-                  lutatus, hinc nihil zril est ut. Ex quodsi as sentior pro des
-                  set vel, saepe accusam percipit mel ne. Viris ex petenda ad
-                  vim, impedit quaestio ex pri. Hinc deserunt eum no. Vel et
-                  fabellas partiendo, brute posse in mea. Vel ad verear pla
-                  cerat gu bergren, ad mucius invidunt gloriatur vim. Qui no
-                  minavi sapie ntem ac commod are ex sed.
+                  Lorem ipsum dolor sit amet, ad duo ubique dicunt, et commune sensibus eam, at vix omnis fe ugiat sca
+                  evola. Has princip es ap pella tur ut, ne has sonet elitr latine, an quo summo munere. Suscipit
+                  adipiscing vis in, an vim pla tonem sa lutatus, hinc nihil zril est ut. Ex quodsi as sentior pro des
+                  set vel, saepe accusam percipit mel ne. Viris ex petenda ad vim, impedit quaestio ex pri. Hinc
+                  deserunt eum no. Vel et fabellas partiendo, brute posse in mea. Vel ad verear pla cerat gu bergren, ad
+                  mucius invidunt gloriatur vim. Qui no minavi sapie ntem ac commod are ex sed.
                 </TabPanel>
                 <TabPanel value="2" className="tab--content">
                   Dimensions &emsp; &emsp; 15 × 10 × 10 cm
@@ -305,10 +320,7 @@ function MainDetail() {
                   </div>
                   <div className="review replyUser">
                     <h6 className="tab--content__title">Leave a comment</h6>
-                    <p>
-                      Your email address will not be published. Required fields
-                      are marked *
-                    </p>
+                    <p>Your email address will not be published. Required fields are marked *</p>
                   </div>
                   <label>Your Rating</label>
                   <Stack spacing={1}>
@@ -317,37 +329,18 @@ function MainDetail() {
                       defaultValue={0}
                       size="small"
                       sx={{
-                        color: "#2f3327",
+                        color: '#2f3327',
                       }}
                     />
                   </Stack>
-                  <TextareaAutosize
-                    aria-label="empty textarea"
-                    placeholder="Your Review *"
-                    className="textarea"
-                  />
+                  <TextareaAutosize aria-label="empty textarea" placeholder="Your Review *" className="textarea" />
                   <div className="form--author">
-                    <input
-                      name="author"
-                      placeholder="Your Name *"
-                      type="text"
-                      size="80"
-                      required="required"
-                    />
-                    <input
-                      name="author"
-                      placeholder="Your Email *"
-                      type="text"
-                      size="80"
-                      required="required"
-                    />
+                    <input name="author" placeholder="Your Name *" type="text" size="80" required="required" />
+                    <input name="author" placeholder="Your Email *" type="text" size="80" required="required" />
                   </div>
                   <div className="form--subscrible">
                     <input type="checkbox" value="yes" />
-                    <label>
-                      Save my name, email, and website in this browser for the
-                      next time I comment.
-                    </label>
+                    <label>Save my name, email, and website in this browser for the next time I comment.</label>
                   </div>
                   <button type="button" className="button--style btn--submit">
                     {title.title}
@@ -358,149 +351,119 @@ function MainDetail() {
                 <div className="wrap--title">
                   <h4 className="wrap--title__paragraph">Related products</h4>
                 </div>
-                <div className="list--product__row" >
-                  <div className="swiper-slide" style={{ textDecoration: "none" }} onClick={handleClick} onMouseOver={handleHover}>
-                    
-                      <img
-                        src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-4-img-1.jpg"
-                        alt=""
-                      />
-                      <div className="swiper-product">
-                        <div className="swiper-product-left">
-                          <div className="swiper-product-categories">
-                            <h5
-                              itemProp="name"
-                              className="swiper-product-title"
-                            >
-                              <Link
-                                itemProp="url"
-                                className="swiper-product-link"
-                                to="/detail"
-                              >
-                                Scrub
-                              </Link>
-                            </h5>
-                            <Link to="/detail" rel="tag">
-                              Body Care
+                <div className="list--product__row">
+                  <div
+                    className="swiper-slide"
+                    style={{ textDecoration: 'none' }}
+                    onClick={handleClick}
+                    onMouseOver={handleHover}
+                  >
+                    <img
+                      src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-4-img-1.jpg"
+                      alt=""
+                    />
+                    <div className="swiper-product">
+                      <div className="swiper-product-left">
+                        <div className="swiper-product-categories">
+                          <h5 itemProp="name" className="swiper-product-title">
+                            <Link itemProp="url" className="swiper-product-link" to="/detail">
+                              Scrub
                             </Link>
-                          </div>
+                          </h5>
+                          <Link to="/detail" rel="tag">
+                            Body Care
+                          </Link>
                         </div>
-                        <div className="swiper-product-right">
-                          <div className="swiper-product-amount">
-                            <div className="swiper-product-price">
-                              <span className="product-price">$35.00</span>
-                            </div>
+                      </div>
+                      <div className="swiper-product-right">
+                        <div className="swiper-product-amount">
+                          <div className="swiper-product-price">
+                            <span className="product-price">$35.00</span>
                           </div>
                         </div>
                       </div>
-                    
+                    </div>
                   </div>
-                  <div className="swiper-slide" style={{ textDecoration: "none" }} onClick={handleClick}>
-                    
-                      <img
-                        src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-2-img-1-300x441.jpg"
-                        alt=""
-                      />
-                      <div className="swiper-product">
-                        <div className="swiper-product-left">
-                          <div className="swiper-product-categories">
-                            <h5
-                              itemProp="name"
-                              className="swiper-product-title"
-                            >
-                              <Link
-                                itemProp="url"
-                                className="swiper-product-link"
-                                to="/detail"
-                              >
-                                Coco Skies
-                              </Link>
-                            </h5>
-                            <Link to="/detail" rel="tag">
-                              Body Care
+                  <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+                    <img
+                      src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-2-img-1-300x441.jpg"
+                      alt=""
+                    />
+                    <div className="swiper-product">
+                      <div className="swiper-product-left">
+                        <div className="swiper-product-categories">
+                          <h5 itemProp="name" className="swiper-product-title">
+                            <Link itemProp="url" className="swiper-product-link" to="/detail">
+                              Coco Skies
                             </Link>
-                          </div>
+                          </h5>
+                          <Link to="/detail" rel="tag">
+                            Body Care
+                          </Link>
                         </div>
-                        <div className="swiper-product-right">
-                          <div className="swiper-product-amount">
-                            <div className="swiper-product-price">
-                              <span className="product-price">$78.00</span>
-                            </div>
+                      </div>
+                      <div className="swiper-product-right">
+                        <div className="swiper-product-amount">
+                          <div className="swiper-product-price">
+                            <span className="product-price">$78.00</span>
                           </div>
                         </div>
                       </div>
-                    
+                    </div>
                   </div>
-                  <div className="swiper-slide" style={{ textDecoration: "none" }} onClick={handleClick}>
-                    
-                      <img
-                        src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-10-img-1-1-300x441.jpg"
-                        alt=""
-                      />
-                      <div className="swiper-product">
-                        <div className="swiper-product-left">
-                          <div className="swiper-product-categories">
-                            <h5
-                              itemProp="name"
-                              className="swiper-product-title"
-                            >
-                              <Link
-                                itemProp="url"
-                                className="swiper-product-link"
-                                to="/detail"
-                              >
-                                Honey Green Tea
-                              </Link>
-                            </h5>
-                            <Link to="/detail" rel="tag">
-                              Body Care
+                  <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+                    <img
+                      src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-10-img-1-1-300x441.jpg"
+                      alt=""
+                    />
+                    <div className="swiper-product">
+                      <div className="swiper-product-left">
+                        <div className="swiper-product-categories">
+                          <h5 itemProp="name" className="swiper-product-title">
+                            <Link itemProp="url" className="swiper-product-link" to="/detail">
+                              Honey Green Tea
                             </Link>
-                          </div>
+                          </h5>
+                          <Link to="/detail" rel="tag">
+                            Body Care
+                          </Link>
                         </div>
-                        <div className="swiper-product-right">
-                          <div className="swiper-product-amount">
-                            <div className="swiper-product-price">
-                              <span className="product-price">$25.00</span>
-                            </div>
+                      </div>
+                      <div className="swiper-product-right">
+                        <div className="swiper-product-amount">
+                          <div className="swiper-product-price">
+                            <span className="product-price">$25.00</span>
                           </div>
                         </div>
                       </div>
-                    
+                    </div>
                   </div>
-                  <div className="swiper-slide" style={{ textDecoration: "none" }} onClick={handleClick}>
-                    
-                      <img
-                        src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/h2-product-6-img-300x441.jpg"
-                        alt=""
-                      />
-                      <div className="swiper-product">
-                        <div className="swiper-product-left">
-                          <div className="swiper-product-categories">
-                            <h5
-                              itemProp="name"
-                              className="swiper-product-title"
-                            >
-                              <Link
-                                itemProp="url"
-                                className="swiper-product-link"
-                                to="/detail"
-                              >
-                                Pl Freckle
-                              </Link>
-                            </h5>
-                            <Link to="/detail" rel="tag">
-                              Beauty
+                  <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+                    <img
+                      src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/h2-product-6-img-300x441.jpg"
+                      alt=""
+                    />
+                    <div className="swiper-product">
+                      <div className="swiper-product-left">
+                        <div className="swiper-product-categories">
+                          <h5 itemProp="name" className="swiper-product-title">
+                            <Link itemProp="url" className="swiper-product-link" to="/detail">
+                              Pl Freckle
                             </Link>
-                          </div>
+                          </h5>
+                          <Link to="/detail" rel="tag">
+                            Beauty
+                          </Link>
                         </div>
-                        <div className="swiper-product-right">
-                          <div className="swiper-product-amount">
-                            <div className="swiper-product-price">
-                              <span className="product-price">$90.00</span>
-                            </div>
+                      </div>
+                      <div className="swiper-product-right">
+                        <div className="swiper-product-amount">
+                          <div className="swiper-product-price">
+                            <span className="product-price">$90.00</span>
                           </div>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -16,20 +16,20 @@
 
         & span {
             color: color(color-subscribe);
-            font-family: "Quentin", sans-serif;
+            font-family: $font--special;
             font-size: 30px;
             margin-bottom: 11px;
         }
 
         & h2 {
             font-size: 38px;
-            font-family: "Montserrat", sans-serif;
+            font-family: $font--title;
             font-weight: 600;
         }
 
         & label {
             font-size: 14px;
-            font-family: "Poppins", sans-serif;
+            font-family: $font--primary;
             color: color(color-primary);
             margin-top: 10px;
             max-width: fit-content;
@@ -43,12 +43,11 @@
             border: none;
             border-bottom: 1px solid color(color-button);
             margin-bottom: 24px;
-            font-family: "Montserrat", sans-serif;
+            font-family: $font--title;
             font-size: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
-            // flex-direction: column;
             font-weight: 600;
             line-height: 27px;
             padding-bottom: 2px;
@@ -65,7 +64,7 @@
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        font-family: "Poppins", sans-serif;
+        font-family: $font--primary;
         color: color(color-primary);
 
         &__remember {
@@ -113,7 +112,7 @@
     padding:16px 0;
     background-color: #f7f7f7;
     font-weight: 600;
-    font-family: "Montserrat", sans-serif;
+    font-family: $font--title;
     text-transform: capitalize;
     font-size: 16px;
     

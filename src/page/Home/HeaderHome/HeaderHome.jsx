@@ -8,7 +8,7 @@ function HeaderHome() {
       <div className="home--header__left">
         <Link
           itemProp="url"
-         to="/home"
+         to="/"
           target="_blank"
           rel="noreferrer"
         >
@@ -16,7 +16,7 @@ function HeaderHome() {
         </Link>
         <Link
           itemProp="url"
-          to="/home"
+          to="/"
           target="_blank"
           rel="noreferrer"
         >
@@ -24,7 +24,7 @@ function HeaderHome() {
         </Link>
         <Link
           itemProp="url"
-         to="/home"
+         to="/"
           target="_blank"
           rel="noreferrer"
         >
@@ -33,7 +33,7 @@ function HeaderHome() {
       </div>
       <div className="home--header__center">
         <span>Free deliveries worldwide! For more info click &nbsp; </span>
-        <Link to="/home">
+        <Link to="/">
           <span>Here</span>
         </Link>
       </div>

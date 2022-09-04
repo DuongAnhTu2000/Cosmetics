@@ -32,7 +32,6 @@ function SwiperJs() {
         loopFillGroupWithBlank={true}
         autoplay={{
           delay: 1000,
-          disableOnInteraction: false,
         }}
         modules={[Pagination, Navigation]}
         className="mySwiper"

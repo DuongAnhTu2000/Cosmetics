@@ -16,14 +16,14 @@
 
         & h3 {
             font-size: 30px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: $font--title;
             font-weight: 600;
             margin: 0;
         }
 
         .breadcrumb {
             font-size: 13px;
-            font-family: "Poppins", sans-serif;
+            font-family: $font--primary;
             color: color( text-breadcrumb);
             &:hover {
                 color: color(text-input);

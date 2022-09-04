@@ -1,4 +1,4 @@
-import HeaderHome from "./Header/HeaderHome";
+import HeaderHome from "./HeaderHome/HeaderHome";
 import NavbarHome from "./Navbar/NavbarHome";
 import SliderJS from "./SliderJS/SliderJS";
 import Swiper from "./Swiper/Swiper";

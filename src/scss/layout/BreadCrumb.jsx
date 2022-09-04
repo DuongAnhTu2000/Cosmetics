@@ -22,7 +22,7 @@ function Breadcrumb(title) {
         <h3>{title.title}</h3>
         <Breadcrumbs separator="\" className="breadcrumb" underline="none">
           <Link
-            to="/home"
+            to="/"
             sx={{
               color: "#68745c",
             }}

@@ -1,4 +1,5 @@
 import './MainShop.scss';
+// import AddToCart from '../../scss/component/AddToCart';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -9,9 +10,11 @@ import Slider from '@mui/material/Slider';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { createTheme } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+// import { createTheme } from '@mui/material/styles';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { getProduct } from '../../redux/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -20,16 +23,20 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
 }));
 
-const theme = createTheme({
-  custom: {
-    color: '#68745c',
-  },
-});
-// const minDistance = 0;
 
-function MainProduct(title) {
+function MainProduct() {
+  const products = useSelector((state) => {
+    return state.product.product;
+  });
   const [value, setValue] = useState([0, 150]);
+  // const [hover , setHover] = useState(false);
   const [option, setOption] = useState('');
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
 
   const handleOption = (event) => {
     setOption(event.target.value);
@@ -40,7 +47,9 @@ function MainProduct(title) {
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
   };
-
+  function handleClick() {
+    navigate('/detail');
+  }
   return (
     <div className="main--product">
       <Box sx={{ flexGrow: 1 }}>
@@ -50,12 +59,8 @@ function MainProduct(title) {
               <div className="main--product__result">
                 <p>Showing 1–9 of 86 results</p>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 230 }}>
-                  <Select
-                    value={option}
-                    onChange={handleOption}
-                    displayEmpty
-                  >
-                    <MenuItem value="">
+                  <Select value={option} onChange={handleOption} displayEmpty>
+                    <MenuItem value="" className='font--filter'>
                       <em>Default sorting</em>
                     </MenuItem>
                     <MenuItem value={10}>Sort by popularity</MenuItem>
@@ -69,14 +74,37 @@ function MainProduct(title) {
             </Item>
             <Item>
               <Stack>
-                <Pagination
-                  count={10}
-                  theme={theme}
-                  hidePrevButton={false}
-                  sx={{
-                    fontWeight: '600',
-                  }}
-                ></Pagination>
+                <div className="main--product__list" >
+                {products.map((product, id) => (
+                    <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick} key={id}>
+                      <span className="swiper-slide-tag">Sale</span>
+                      <img src={product.image} alt="" />
+                      <div className="swiper-product">
+                        <div className="swiper-product-left">
+                          <div className="swiper-product-categories">
+                            <h5 itemProp="name" className="swiper-product-title">
+                              <Link itemProp="url" className="swiper-product-link" to="/detail">
+                                {product.name}
+                              </Link>
+                            </h5>
+                            <Link to="/detail" rel="tag">
+                              {product.categories}
+                            </Link>
+                          </div>
+                        </div>
+                        <div className="swiper-product-right">
+                          <div className="swiper-product-amount">
+                            <div className="swiper-product-price">
+                              <span className="swiper-product-price-discount"></span>
+                              <span className="product-price">${product.price}</span>
+                               
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                ))}
+                </div>
               </Stack>
             </Item>
           </Grid>
@@ -127,33 +155,33 @@ function MainProduct(title) {
                       </div>
                     </li>
                     <li className="widget--products__list__item">
-                      <a href="https://sante.qodeinteractive.com/product/coco-green/">
+                      <Link to="/detail">
                         <img
                           width="70"
                           height="102"
                           src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-3-img-1-300x441.jpg"
                           alt=""
                         ></img>
-                      </a>
+                      </Link>
                       <div className="widget--content">
                         <h6>
-                          <a itemProp="url" href="https://sante.qodeinteractive.com/product/coco-skies/">
+                          <Link itemProp="url" to="/detail">
                             Coco Green
-                          </a>
+                          </Link>
                         </h6>
                         <span className="swiper-product-price-discount">$70.00</span>
                         <span>$50.00</span>
                       </div>
                     </li>
                     <li className="widget--products__list__item">
-                      <a href="https://sante.qodeinteractive.com/product/scrub/">
+                      <Link to="/detail">
                         <img
                           width="70"
                           height="102"
                           src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-4-img-1-300x441.jpg"
                           alt=""
                         ></img>
-                      </a>
+                      </Link>
                       <div className="widget--content">
                         <h6>
                           <a itemProp="url" href="https://sante.qodeinteractive.com/product/coco-skies/">

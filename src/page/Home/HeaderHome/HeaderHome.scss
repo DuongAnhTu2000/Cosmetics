@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     position: relative;
-    font-family: 'Poppins', sans-serif;
+    font-family: $font--primary;
     color: color(color-header);
 
     &__left {
@@ -56,11 +56,15 @@
             margin-right: 12px;
             font-weight: 600;
             font-size: 15px;
+        transition: all 0.4s ease-out;
+
         }
 
         &__login.lock {
             font-weight: 600;
             font-size: 16px;
+            font-family: $font--title;
+            transition: all 0.4s ease-out;
 
             .lnr-lock {
                 margin-right: 6px;
@@ -72,6 +76,7 @@
         &__login:hover {
             cursor: pointer;
             color: color(color-pseudo);
+
         }
 
         .btn--login {

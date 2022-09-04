@@ -4,7 +4,7 @@
 
 .navbar--home {
     padding: 0px 40px;
-    justify-content: center;
+    justify-content: space-around;
 
     &__icon {
         display: flex;
@@ -27,7 +27,7 @@
         align-items: center;
         font-weight: 600;
         font-size: 16px;
-        font-family: 'Poppins', sans-serif;
+        font-family: $font--primary;
 
         & a {
             text-decoration: none;
@@ -101,51 +101,6 @@
                 top: 38%;
                 text-align: center;
             }
-
-            &--dropdown {
-                position: absolute;
-                left: auto;
-                right: 0;
-                text-align: left;
-                
-                -webkit-transition: -webkit-clip-path .2s ease-out;
-                transition: -webkit-clip-path .2s ease-out;
-                -o-transition: clip-path .2s ease-out;
-                transition: clip-path .2s ease-out;
-                transition: clip-path .2s ease-out, -webkit-clip-path .2s ease-out;
-                z-index: 999;
-                top: 100%;
-                display: none;
-
-                &:hover {
-                    display: block;
-                }
-
-                      
-                &__wrap {
-                    position: relative;
-                    display: inline-block;
-                    vertical-align: top;
-                    width: 254px;
-                    padding: 20px 0px 10px 0px;
-                    background-color: color(background-button);
-                    border: 1px solid color(border-cart);
-                    bottom: 24px;
-                    font-size: 14px;
-                    font-weight: 300;
-
-                    &.cart--navbar {
-                        bottom: 0 !important;
-                    }
-                    
-                }
-
-                & p {
-                    text-align: center;
-                    color: color(color-primary);
-                }
-            }
-
           
         }
 

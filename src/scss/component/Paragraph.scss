@@ -29,7 +29,7 @@
 
             & h2 {
                 font-size: 38px;
-                font-family: "Montserrat", sans-serif;
+                font-family: $font--title;
                 font-weight: 600;
             }
 
@@ -37,7 +37,7 @@
 
                 h6 {
                     padding: 0;
-                    font-family: "Poppins", sans-serif;
+                    font-family: $font--primary;
                     font-size: 14px;
                 }
             }

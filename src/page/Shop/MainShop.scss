@@ -11,37 +11,46 @@
         margin-bottom: 40px;
         background-color: none !important;
         padding: -8px !important;
+        font-family: $font--primary;
 
-        .filter--option {
-            position: relative;
-            width: 231px;
+        // .filter--option {
+        //     position: relative;
+        //     width: 231px;
 
-            & select {
-                border: none;
-                border-bottom: 1px solid color(line-pseudo);
-                color: color(text-option);
-                font-family: "Poppins", sans-serif;
-                display: block;
+        //     & select {
+        //         border: none;
+        //         border-bottom: 1px solid color(line-pseudo);
+        //         color: color(text-option);
+        //         font-family: $font--primary;
+        //         display: block;
 
-                & option {
-                    color: color(text-list-category);
-                    background-color: color(background-body);
-                    margin-bottom: 4px;
-                    display: block;
+        //         & option {
+        //             color: color(text-list-category);
+        //             background-color: color(background-body);
+        //             margin-bottom: 4px;
+        //             display: block;
 
-                    &:hover {
-                        background-color: color(background-body);
-                        color: color(color-pseudo);
-                    }
-                }
-            }
-        }
+        //             &:hover {
+        //                 background-color: color(background-body);
+        //                 color: color(color-pseudo);
+        //             }
+        //         }
+        //     }
+        // }
+    }
+
+    &__list {
+        display: inline-flex;
+        align-items: center;
+        width: 24%;
+        gap: 30px;
+
     }
 
     .price--filter {
         text-align: left;
         position: relative;
-        font-family: "Montserrat", sans-serif;
+        font-family: $font--title;
 
         & h4 {
             font-size: 23px;
@@ -120,7 +129,7 @@
 
                     & a {
                         text-decoration: none;
-                        font-family: Montserrat, sans-serif;
+                        font-family: $font--title;
                         font-weight: 600;
                         text-transform: none;
                         font-size: 17px;
@@ -132,6 +141,10 @@
                     .widget--content {
                         margin-left: 19px;
                         font-weight: 300;
+
+                        & span {
+                            font-family: $font--primary;
+                        }
                     }
                 }
             }
@@ -139,7 +152,7 @@
 
         .widget--categories {
             padding-left: 0;
-            font-family: "Poppins", sans-serif;
+            font-family: $font--primary;
 
             & ul {
                 display: flex;

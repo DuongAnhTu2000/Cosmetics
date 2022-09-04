@@ -1,4 +1,28 @@
-.image--product {
-    width: 100px;
-    height: 100px;
+@import '../../scss/setting/style.scss';
+
+.dashboard--product {
+    margin: 100px;
+
+    .image--product {
+        width: 60px;
+    }
+    &__title {
+        font-family: $font--title;
+        font-weight: 300;
+        font-size: 18px;
+    }
+    .form--addProduct {
+        display: flex;
+        justify-content: center !important;
+        gap: 14px;
+        margin-top: 40px;
+        align-items: center;
+        margin-right: auto;
+        margin-left: auto;
+        flex-direction: column;
+    }
+
+    .btn--update {
+        margin-top: 16px;
+    }
 }

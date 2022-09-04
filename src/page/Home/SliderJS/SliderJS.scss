@@ -19,13 +19,12 @@
 
     color: color(text-color);
 
-
     & h5 {
-        font-family: 'Quentin',sans-serif;
+        font-family: $font--special;
     }
 
     & p {
-        font-family: 'Montserrat', sans-serif;
+        font-family: $font--primary;
         font-weight: 600;
 
     }
@@ -46,7 +45,7 @@
         }
 
         & p {
-            font-size: 20px;
+            font-size: 24px;
         }
     }
 

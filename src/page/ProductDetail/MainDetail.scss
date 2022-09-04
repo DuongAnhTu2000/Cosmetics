@@ -9,6 +9,7 @@
         display: flex;
         gap: 14px;
         align-items: flex-end;
+
         &__wrap {
             width: 18%;
             display: flex;
@@ -23,7 +24,7 @@
 
     .product--summary {
         text-align: left;
-        font-family: "Montserrat", sans-serif;
+        font-family: $font--title;
 
         & h2 {
             font-weight: 600;
@@ -37,14 +38,14 @@
 
         }
 
-        .text-description {
+        .text--description {
             margin-top: 33px;
 
             & p {
                 color: color(color-primary);
                 font-weight: 300;
                 font-size: 14px;
-                font-family: "Poppins", sans-serif;
+                font-family: $font--primary;
             }
         }
 
@@ -55,13 +56,59 @@
                 margin-right: 18px;
             }
 
+            .quantity--button {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-right: 24px;
+                position: relative;
+                text-align: center;
+                border: 1px solid color(color-selection);
+
+                .input--text {
+                    position: relative;
+                    height: 41px;
+                    width: 47px;
+                    padding: 0;
+                    margin: 0 25px 0 0;
+                    font-family: inherit;
+                    line-height: 48px;
+                    border: none;
+                    text-align: center;
+                }
+
+                .quantity--plus {
+                    position: absolute;
+                    right: 2px;
+                    width: 23px;
+                    height: 21px;
+                    border-left: 0;
+                    cursor: pointer;
+                    top: 32px;
+                    font-size: 9px;
+                    color: color(color-button);
+                }
+
+                .quantity--minus {
+                    position: absolute;
+                    right: 2px;
+                    width: 23px;
+                    height: 21px;
+                    border-left: 0;
+                    cursor: pointer;
+                    bottom: 24px;
+                    font-size: 9px;
+                    line-height: 20px;
+                    color: color(color-button);
+
+                }
+            }
+
             .button--cart {
                 color: #68745c;
-
                 font-size: 15px;
                 font-weight: 600;
                 padding: 14px 38px;
-                ;
                 text-align: center;
                 border: 1px solid transparent;
                 transition: ease-in-out all 0.3s;
@@ -92,7 +139,7 @@
         .product-description {
             margin-top: 20px;
             color: color(color-primary);
-            font-family: "Poppins", sans-serif;
+            font-family: $font--primary;
 
 
             & span {
@@ -118,7 +165,7 @@
         .tabs--list {
             padding: "0 20px 11px";
             font-weight: 600;
-            font-family: "Montserrat", sans-serif;
+            font-family: $font--title;
             text-transform: capitalize;
             font-size: 16px;
             color: color(color-tabs);
@@ -126,7 +173,7 @@
 
         .tab--content {
             color: color(color-primary);
-            font-family: "Poppins", sans-serif;
+            font-family: $font--primary;
             font-size: 14px;
             padding: 0;
             margin-top: 24px;
@@ -140,7 +187,7 @@
 
             &__title {
                 font-weight: 600;
-                font-family: "Montserrat", sans-serif;
+                font-family: $font--title;
                 color: color(text-title);
             }
 
@@ -202,7 +249,7 @@
             margin-top: 73px;
 
             &__row {
-                display:flex;
+                display: flex;
                 justify-content: space-between;
                 align-items: center;
                 gap: 30px;

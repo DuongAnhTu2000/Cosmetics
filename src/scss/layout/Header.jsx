@@ -1,14 +1,17 @@
 import "./Header.scss";
 import ModalPage from '../component/ModalPage';
-import { Link } from "react-router-dom";
 import { ReactComponent as Cart } from "../../page/assets/svg/Cart.svg";
 import { ReactComponent as Option } from "../../page/assets/svg/Option.svg";
+import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
 function Header() {
 
+  const quantity = useSelector(state => state.cart.quantity);
   return (
     <div className="header--container">
       <div className="header--container__left">
-        <Link itemProp="url" rel="home" to="/home">
+        <Link itemProp="url" rel="home" to="/">
           <img
             src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/logo-home5-2.png"
             alt="logo"
@@ -17,7 +20,7 @@ function Header() {
         </Link>
       </div>
       <div className=".navbar--home__menu header--container__center">
-        <Link to="/home">
+        <Link to="/">
           <span className="navbar--home__menu__list">Home</span>
         </Link>
         <Link to="#">
@@ -43,13 +46,9 @@ function Header() {
             <Link itemProp="url" to="/cart">
               <div className="cart__button">
                 <Cart />
-                <span className="cart--count">0</span>
+                <span className="cart--count">{quantity}</span>
               </div>
-              <div className="cart--dropdown">
-                <div className="cart--dropdown__wrap">
-                  <p>No products in the cart.</p>
-                </div>
-              </div>
+              
             </Link>
           </div>
         </div>

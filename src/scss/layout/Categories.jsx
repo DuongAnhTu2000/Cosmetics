@@ -8,7 +8,7 @@ function Categories() {
           <div className="product--container__row__col">
             <Link
               itemProp="url"
-               to="/home"
+               to="/"
               target="_self"
             >
               <div className="product--image">
@@ -23,7 +23,7 @@ function Categories() {
           <div className="product--container__col">
             <Link
               itemProp="url"
-              to="/home"
+              to="/"
               target="_self"
             >
               <div className="product--image">
@@ -38,7 +38,7 @@ function Categories() {
           <div className="product--container__col">
             <Link
               itemProp="url"
-              to="/home"
+              to="/"
               target="_self"
             >
               <div className="product--image">

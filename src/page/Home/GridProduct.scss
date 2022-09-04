@@ -30,11 +30,13 @@
             & h5 {
                 margin: 8px 0;
                 color: color(color-product);
-                
+                font-family: $font--primary;
+                font-weight: 600;
+                font-size: 17px;
             }
 
             & h6 {
-                font-family: 'Montserrat,sans-serif';
+                font-family: $font--title;
                 font-size: 14px;
                 color: color(color-primary);
                 letter-spacing: .04em;

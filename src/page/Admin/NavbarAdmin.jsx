@@ -24,7 +24,7 @@ const NavbarAdmin = () => {
     setAnchorElNav(null);
   };
   function handleLogOut() {
-    navigate('/home');
+    navigate('/');
     // window.location.reload();
   }
 

@@ -21,7 +21,7 @@
 
         & span {
             color: color(color-subscribe);
-            font-family: 'Quentin', sans-serif;
+            font-family: $font--special;
             font-size: 30px;
             margin-bottom: 11px;
         }
@@ -43,7 +43,7 @@
 
         & h4 {
             margin: 0 0 26px;
-            font-family: 'Poppins,sans-serif';
+            font-family: $font--primary;
             font-weight: 300;
             color: color(color-primary);
             font-size: 17px;
