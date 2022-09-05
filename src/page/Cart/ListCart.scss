@@ -193,11 +193,8 @@
         .checkout {
             font-family: $font--title;
             margin-bottom: 45px;
-
-            .btn--checkout {
-                width: 100% !important;
-
-            }
+            display: flex;
+            justify-content: center;
         }
     }
 

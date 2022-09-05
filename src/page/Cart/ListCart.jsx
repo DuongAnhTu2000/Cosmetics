@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decreaseQuantity, increaseQuantity, totalPrice, clearCart, removeItem } from '../../redux/cartSlice';
+import { decreaseQuantity, increaseQuantity, totalPrice, removeItem } from '../../redux/cartSlice';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -17,18 +17,22 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
 }));
 
-function ListCart(id,name,image,price) {
+function ListCart() {
   const products = useSelector((state) => state.cart.products);
   console.log(products);
   const dispatch = useDispatch();
-  const handleDecrease = (id) => {
-    dispatch(decreaseQuantity(id));
+  const handleDecrease = () => {
+    dispatch(decreaseQuantity());
   }
-  const handleIncrease = (id) => {
-    dispatch(increaseQuantity(id));
+  const handleIncrease = () => {
+    dispatch(increaseQuantity());
   }
   const handleTotalPrice = (id) => {
       dispatch(totalPrice());
+  }
+  const handleDelete = (id) => {
+    dispatch(removeItem(id));
+
   }
   const [count, setCount] = useState(1);
   const [title] = useState({
@@ -46,7 +50,7 @@ function ListCart(id,name,image,price) {
                     <table className="table--cart">
                       <tbody className="product">
                         <tr className="table--cart__items">
-                          <td className="product--remove">
+                          <td className="product--remove" onClick={handleDelete}>
                             <span className="lnr lnr-cross"></span>
                           </td>
                           <td className="product--image">
@@ -71,7 +75,7 @@ function ListCart(id,name,image,price) {
                               className="quantity--plus"
                               onClick={() => {
                                 setCount(Math.max(count - 1, 1));
-                                handleDecrease(id);
+                                handleDecrease();
                               }}
                             >
                               <span className="lnr lnr-chevron-down"></span>
@@ -114,7 +118,7 @@ function ListCart(id,name,image,price) {
                       </td>
                     </tr>
                     <tr className="shipping">
-                      <h5>Shipping</h5>
+                      <h5>Shipping</h5> 
                       <td className="option--delivery">
                         <ul>
                           <li>
@@ -136,10 +140,10 @@ function ListCart(id,name,image,price) {
                       <h5>Total</h5>
                       <h5>$105</h5>
                     </tr>
-                  </tbody>
-                  <div className="checkout">
+                  <tr className="checkout">
                     <ButonStyle className="btn--checkout" title={title.title} style={{ width: '100%' }} />
-                  </div>
+                  </tr>
+                  </tbody>
                 </table>
               </div>
             </Item>

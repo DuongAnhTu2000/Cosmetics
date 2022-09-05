@@ -4,13 +4,12 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Pagination from '@mui/material/Pagination';
+// import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-// import { createTheme } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getProduct } from '../../redux/productSlice';
@@ -52,7 +51,7 @@ function MainProduct() {
   }
   return (
     <div className="main--product">
-      <Box sx={{ flexGrow: 1 }}>
+      <Box >
         <Grid container spacing={4}>
           <Grid flexDirection="column" container item xs={7.5} spacing={0}>
             <Item>
@@ -76,8 +75,8 @@ function MainProduct() {
               <Stack>
                 <div className="main--product__list" >
                 {products.map((product, id) => (
-                    <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick} key={id}>
-                      <span className="swiper-slide-tag">Sale</span>
+                    <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick} key={id}>
+                      <span className="swiper-slides-tag">Sale</span>
                       <img src={product.image} alt="" />
                       <div className="swiper-product">
                         <div className="swiper-product-left">

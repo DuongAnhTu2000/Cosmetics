@@ -12,39 +12,15 @@
         background-color: none !important;
         padding: -8px !important;
         font-family: $font--primary;
-
-        // .filter--option {
-        //     position: relative;
-        //     width: 231px;
-
-        //     & select {
-        //         border: none;
-        //         border-bottom: 1px solid color(line-pseudo);
-        //         color: color(text-option);
-        //         font-family: $font--primary;
-        //         display: block;
-
-        //         & option {
-        //             color: color(text-list-category);
-        //             background-color: color(background-body);
-        //             margin-bottom: 4px;
-        //             display: block;
-
-        //             &:hover {
-        //                 background-color: color(background-body);
-        //                 color: color(color-pseudo);
-        //             }
-        //         }
-        //     }
-        // }
     }
 
     &__list {
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        width: 24%;
         gap: 30px;
-
+        flex-wrap: wrap;
+         flex-direction: row; 
+        justify-content: space-between;
     }
 
     .price--filter {

@@ -19,10 +19,10 @@ function SwiperJs() {
     <div className="wrap--slide">
       <div className="wrap--title">
         <h4 className="wrap--title__paragraph">Featured Items</h4>
-        <div className="wrap--title__arrow">
+        {/* <div className="wrap--title__arrow">
           <ArrowLeft />
           <ArrowRight />
-        </div>
+        </div> */}
       </div>
       <Swiper
         slidesPerView={4}
@@ -37,8 +37,8 @@ function SwiperJs() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
-            <span className="swiper-slide-tag">Sale</span>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
+            <span className="swiper-slides-tag">Sale</span>
             <img src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-1-img-1.jpg" alt="" />
             <div className="swiper-product">
               <div className="swiper-product-left">
@@ -65,8 +65,8 @@ function SwiperJs() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
-            <span className="swiper-slide-tag">New</span>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
+            <span className="swiper-slides-tag">New</span>
 
             <img src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-2-img-1.jpg" alt="" />
             <div className="swiper-product">
@@ -93,8 +93,8 @@ function SwiperJs() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
-            <span className="swiper-slide-tag">Sale</span>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
+            <span className="swiper-slides-tag">Sale</span>
 
             <img src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-3-img-1.jpg" alt="" />
             <div className="swiper-product">
@@ -122,7 +122,7 @@ function SwiperJs() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
             <img src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-4-img-1.jpg" alt="" />
             <div className="swiper-product">
               <div className="swiper-product-left">
@@ -148,7 +148,7 @@ function SwiperJs() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
             <img src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-8-img-1.jpg" alt="" />
             <div className="swiper-product">
               <div className="swiper-product-left">
@@ -174,7 +174,7 @@ function SwiperJs() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
             <img src="	https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-10-img-1-1.jpg" alt="" />
             <div className="swiper-product">
               <div className="swiper-product-left">
@@ -200,7 +200,7 @@ function SwiperJs() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
             <img src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-7-img-1.jpg" alt="" />
             <div className="swiper-product">
               <div className="swiper-product-left">
@@ -226,7 +226,7 @@ function SwiperJs() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="swiper-slide" style={{ textDecoration: 'none' }} onClick={handleClick}>
+          <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick}>
             <img src="	https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-6-img-1.jpg" alt="" />
             <div className="swiper-product">
               <div className="swiper-product-left">

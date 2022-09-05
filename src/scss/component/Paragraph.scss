@@ -25,6 +25,7 @@
                 line-height: 1.5;
                 flex-wrap: wrap;
                 padding: 0 18%;
+                font-family: $font--primary;
             }
 
             & h2 {
@@ -39,6 +40,7 @@
                     padding: 0;
                     font-family: $font--primary;
                     font-size: 14px;
+                    
                 }
             }
         }

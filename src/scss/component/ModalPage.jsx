@@ -12,8 +12,6 @@ import TabPanel from '@mui/lab/TabPanel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './ModalPage.scss';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { login } from '../../redux/authSlice';
 import axios from 'axios';
 
 const style = {
@@ -46,8 +44,7 @@ function ModalPage() {
   };
   const navigate = useNavigate();
 
-  const login = async (event) => {
-    event.preventDefault();
+  const handlelogin = async () => {
     try {
       const response = await axios.post('https://reqres.in/api/login', {
         email,
@@ -62,6 +59,21 @@ function ModalPage() {
       console.error(err);
     }
   };
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post('https://reqres.in/api/register', {
+        email,
+        password,
+      });
+      if (!response.data) {
+        return;
+      }
+      localStorage.setItem('user', JSON.stringify(response.data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Button
@@ -112,6 +124,7 @@ function ModalPage() {
                     <input
                       type="email"
                       name="email"
+                      value={email}
                       size={37}
                       placeholder="User Name *"
                       onChange={(e) => setEmail(e.target.value)}
@@ -119,6 +132,7 @@ function ModalPage() {
                     <input
                       type="password"
                       name="password"
+                      value={password}
                       size={37}
                       placeholder="Password *"
                       onChange={(e) => setPassword(e.target.value)}
@@ -135,7 +149,7 @@ function ModalPage() {
                       Lost Your password?
                     </Link>
                   </div>
-                  <button type="button" className="button--style button--modal" onClick={login}>
+                  <button type="button" className="button--style button--modal" onClick={handlelogin}>
                     Login
                   </button>
                   <div className="modal--link">
@@ -166,7 +180,7 @@ function ModalPage() {
                       placeholder="Repeat Password *"
                     />
                   </div>
-                  <button type="button" className="button--style button--modal">
+                  <button type="button" className="button--style button--modal" onClick={handleRegister}>
                     Register
                   </button>
                 </TabPanel>

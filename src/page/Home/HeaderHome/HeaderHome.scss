@@ -33,6 +33,7 @@
         justify-content: space-around;
         font-weight: 600;
         align-items: center;
+        font-family: $font--title;
 
         & a {
             color: color(color-pseudo);
@@ -57,6 +58,7 @@
             font-weight: 600;
             font-size: 15px;
         transition: all 0.4s ease-out;
+        font-family: $font--title;
 
         }
 

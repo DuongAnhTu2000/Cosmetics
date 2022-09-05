@@ -54,7 +54,6 @@ function Admin() {
   }, []);
 
   const handleLoadUser = () => {
-    console.log('load user');
     dispatch(getUser());
   };
   const handleAddUser = async (e) => {
@@ -147,9 +146,9 @@ function Admin() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
+                              value={email}
                               color="success"
                               className="form--update"
-                              value={email}
                               onChange={(e) => {
                                 setEmail(e.target.value);
                               }}
@@ -170,7 +169,9 @@ function Admin() {
                             />
                           </div>
                           <div className="button--update">
-                            <Button onClick={handleClose} variant="outlined" color="success" fullWidth={true}>
+                            <Button onClick={handleClose} variant="outlined" 
+                            color="success" 
+                            fullWidth={true}>
                               Cancel
                             </Button>
                             <Button

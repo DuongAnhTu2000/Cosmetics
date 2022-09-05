@@ -25,7 +25,8 @@ const NavbarAdmin = () => {
   };
   function handleLogOut() {
     navigate('/');
-    // window.location.reload();
+    localStorage.removeItem("user")
+    console.log("logout")
   }
 
   return (

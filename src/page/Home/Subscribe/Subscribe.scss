@@ -64,6 +64,7 @@
                 color: color(text-color-button) !important;
                 border-color: color(color-button) !important;
                 padding: 11px 44px;
+                font-family: $font--title;
 
                 &:after {
                     background-color: color(button-hover-color);

@@ -68,7 +68,6 @@ function ProductList() {
       price,
       description,
     };
-    console.log("submit");
     await dispatch(addProduct(newProduct));
     await handleLoadProduct();
     e.target.reset();
@@ -88,6 +87,7 @@ function ProductList() {
     };
     dispatch(updateProduct(productUpdate));
     dispatch(getProduct());
+    console.log(getProduct());
   };
 
   const handleDeleteProduct = (id) => {

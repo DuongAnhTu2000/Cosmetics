@@ -15,16 +15,11 @@ const cartSlice = createSlice({
     addtoCart: (state, action) => {
       console.log("them san pham:", action.payload)
       console.log("state: ", state.quantity)
-      // state.products = [...state.products, action.payload]
       state.products.push(action.payload);
       state.quantity += action.payload.count;
       console.log("add", action.payload.count)
 
-      state.totalPrice += action.payload.totalPrice * action.payload.quantity;
-      localStorage.setItem("cartItems", JSON.stringify(state.products));
-    },
-    clearCart: (state) => {
-      state.products = [];
+      state.totalPrice = state.products.reduce((total, item) => total + Number(item.price) * Number(item.quantity), 0)
       localStorage.setItem("cartItems", JSON.stringify(state.products));
     },
     removeItem: (state, action) => {

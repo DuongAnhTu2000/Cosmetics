@@ -23,13 +23,18 @@
                 color: color(color-primary);
 
             }
+
             & h4 {
                 margin-bottom: 12px;
+                font-family: $font--title;
+                font-weight: 600;
             }
 
             & p {
                 color: color(color-primary);
                 margin-bottom: 10%;
+                font-family: $font--primary;
+
             }
 
             &__item {
@@ -84,6 +89,7 @@
                 & p {
                     color: color(text-footer);
                     margin-left: 12px;
+                    font-family: $font--primary;
 
                 }
                 & a {
