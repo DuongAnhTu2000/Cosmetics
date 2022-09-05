@@ -41,13 +41,11 @@ function ProductList() {
   const products = useSelector((state) => {
     return state.product.product;
   });
-  const [form, setForm] = useState({
-    image: '',
-    name: '',
-    categories: '',
-    price: '',
-    description: '',
-  });
+  const [name, setName] = useState('');
+  const [image, setImage] = useState('');
+  const [categories, setCategories] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -64,11 +62,11 @@ function ProductList() {
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const newProduct = {
-      image: 'image',
-      name: 'name',
-      categories: 'categories',
-      price: 'price',
-      description: 'description',
+      image,
+      name,
+      categories,
+      price,
+      description,
     };
     console.log("submit");
     await dispatch(addProduct(newProduct));
@@ -81,11 +79,11 @@ function ProductList() {
     const productUpdate = {
       id,
       newData: {
-        image: 'image',
-        name: 'name',
-        categories: 'categories',
-        price: 'price',
-        description: 'description',
+        image,
+        name,
+        categories,
+        price,
+        description,
       },
     };
     dispatch(updateProduct(productUpdate));
@@ -150,8 +148,11 @@ function ProductList() {
                               component="label"
                               required={true}
                               fullWidth={true}
-                              value={form.image}
+                              value={image}
                               color="success"
+                                onChange={(e) => {
+                                setImage(e.target.value);
+                              }}
                             >
                               Upload
                               <input hidden accept="image/*" type="file" />
@@ -164,11 +165,11 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={form.name}
+                              value={name}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setForm(e.target.value);
+                                setName(e.target.value);
                               }}
                             />
                             <TextField
@@ -178,11 +179,11 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={form.categories}
+                              value={categories}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setForm(e.target.value);
+                                setCategories(e.target.value);
                               }}
                             />
                             <TextField
@@ -192,11 +193,11 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={form.price}
+                              value={price}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setForm(e.target.value);
+                                setPrice(e.target.value);
                               }}
                             />
                             <TextField
@@ -206,11 +207,11 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={form.description}
+                              value={description}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setForm(e.target.value);
+                                setDescription(e.target.value);
                               }}
                             />
                           </div>
@@ -249,14 +250,14 @@ function ProductList() {
           </Table>
         </TableContainer>
         <Stack direction="row" spacing={2}>
-          <form className="form--addProduct" onSubmit={handleAddProduct}>
+          <form className="form--addProduct" >
             <Button
              variant="outlined"
              component="label"
              fullWidth={true}
              color="success"
              onChange={(e) => {
-              setForm(e.target.value);
+              setImage(e.target.value);
             }}
              >
               Upload
@@ -265,7 +266,6 @@ function ProductList() {
                 accept="image/*"
                 name="image"
                 type="file"
-                required={true}
                
               />
               <PhotoCamera />
@@ -277,7 +277,7 @@ function ProductList() {
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setForm(e.target.value);
+                setName(e.target.value);
               }}
             />
             <TextField
@@ -287,7 +287,7 @@ function ProductList() {
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setForm(e.target.value);
+                setCategories(e.target.value);
               }}
             />
             <TextField
@@ -297,7 +297,7 @@ function ProductList() {
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setForm(e.target.value);
+                setPrice(e.target.value);
               }}
             />
             <TextField
@@ -307,10 +307,10 @@ function ProductList() {
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setForm(e.target.value);
+                setDescription(e.target.value);
               }}
             />
-            <Button color="success" variant="contained">
+            <Button color="success" variant="contained" onClick={handleAddProduct}>
               Add Product
             </Button>
           </form>

@@ -58,7 +58,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
 
-    builder.addCase(getUser.pending, (state, action) => {
+    builder.addCase(getUser.pending, (state) => {
       state.isFetching = false;
     });
 
@@ -66,30 +66,22 @@ const userSlice = createSlice({
       state.isFetching = true;
       state.user = action.payload;
     });
-    builder.addCase(addUser.pending, (state, action) => {
+    builder.addCase(addUser.pending, (state) => {
       state.isFetching = false;
       console.log("false");
     });
 
-    builder.addCase(addUser.fulfilled, (state, action) => {
-      // state.isFetching = true;
-      console.log("true");
-      console.log('payload == ', action.payload);
-      // state.user = action.payload;
-
-    });
-
-    builder.addCase(updateUser.pending, (state, action) => {
+    builder.addCase(updateUser.pending, (state) => {
       state.isFetching = false;
     })
-    builder.addCase(updateUser.fulfilled, (state, action) => {
+    builder.addCase(updateUser.fulfilled, (state) => {
       state.isFetching = true;
     })
-    builder.addCase(deleteUser.pending, (state, action) => {
+    builder.addCase(deleteUser.pending, (state) => {
       state.isFetching = false;
 
     });
-    builder.addCase(deleteUser.fulfilled, (state, action) => {
+    builder.addCase(deleteUser.fulfilled, (state) => {
       state.isFetching = true;
     });
   }

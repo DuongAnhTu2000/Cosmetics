@@ -18,8 +18,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Lazy, Pagination, Navigation } from 'swiper';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {addtoCart} from "../../redux/cartSlice";
-import { useDispatch, useSelector } from 'react-redux';
+import { addtoCart } from '../../redux/cartSlice';
+import { useDispatch } from 'react-redux';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/lazy';
@@ -47,47 +47,36 @@ const theme = createTheme({
   },
 });
 function MainDetail() {
-  
   const [open, setOpen] = useState(false);
-  // const [hover, setHover] = useState(false);
   const [count, setCount] = useState(1);
   const [value, setValue] = useState('1');
   let navigate = useNavigate();
   const [title] = useState({
     title: 'Submit',
   });
-  const product = [
-    {
-      "image": "https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-2-img-1-300x441.jpg",
-      "name": "Coco Skies",
-      "price": "78.00",
-      "categories": "Body Care",
-      "description": "cleanser",
-      "id": "1"
-     }
-     
-  ]
-
+  const product = {
+    image: 'https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-2-img-1-300x441.jpg',
+    name: 'Coco Skies',
+    price: '78.00',
+    categories: 'Body Care',
+    description: 'cleanser',
+    id: '1',
+  };
   const dispatch = useDispatch();
-  
+
   const handleAddToCart = (e) => {
     e.preventDefault();
     const newItem = {
-      product,
-      count,
+      ...product,
+      count: count,
     };
     dispatch(addtoCart(newItem));
-    console.log("them san pham ", newItem);
-  }
-
+    console.log('them san pham ', newItem);
+  };
 
   function handleClick() {
     navigate('/detail');
   }
-
-  const handleHover = (e) => {
-    // setHover()
-  };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -356,7 +345,6 @@ function MainDetail() {
                     className="swiper-slide"
                     style={{ textDecoration: 'none' }}
                     onClick={handleClick}
-                    onMouseOver={handleHover}
                   >
                     <img
                       src="https://sante.qodeinteractive.com/wp-content/uploads/2020/09/product-4-img-1.jpg"

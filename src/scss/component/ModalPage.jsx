@@ -45,7 +45,6 @@ function ModalPage() {
     setValue(newValue);
   };
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const login = async (event) => {
     event.preventDefault();
@@ -58,7 +57,7 @@ function ModalPage() {
         return;
       }
       localStorage.setItem('user', JSON.stringify(response.data));
-      navigate.push('/admin');
+      navigate('/admin');
     } catch (err) {
       console.error(err);
     }
@@ -114,7 +113,6 @@ function ModalPage() {
                       type="email"
                       name="email"
                       size={37}
-                      aria-required="true"
                       placeholder="User Name *"
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -122,7 +120,6 @@ function ModalPage() {
                       type="password"
                       name="password"
                       size={37}
-                      aria-required="true"
                       placeholder="Password *"
                       onChange={(e) => setPassword(e.target.value)}
                     />

@@ -70,11 +70,6 @@ function Admin() {
     console.log('reset');
   };
 
-  const handleDeleteUser = (id) => {
-    dispatch(deleteUser(id));
-    dispatch(getUser());
-  };
-
   const handleUpdateUser = (id) => {
     const dataUpdate = {
       id,
@@ -85,6 +80,11 @@ function Admin() {
       },
     };
     dispatch(updateUser(dataUpdate));
+    dispatch(getUser());
+  };
+
+  const handleDeleteUser = (id) => {
+    dispatch(deleteUser(id));
     dispatch(getUser());
   };
   return (

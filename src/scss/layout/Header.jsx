@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 function Header() {
 
-  const quantity = useSelector(state => state.cart.quantity);
+  const quantity  = useSelector(state => state.cart.quantity);
   return (
     <div className="header--container">
       <div className="header--container__left">

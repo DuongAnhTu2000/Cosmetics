@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { decreaseQuantity, increaseQuantity, totalPrice, clearCart, removeItem } from '../../redux/cartSlice';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -17,9 +17,19 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
 }));
 
-function ListCart() {
+function ListCart(id,name,image,price) {
   const products = useSelector((state) => state.cart.products);
-
+  console.log(products);
+  const dispatch = useDispatch();
+  const handleDecrease = (id) => {
+    dispatch(decreaseQuantity(id));
+  }
+  const handleIncrease = (id) => {
+    dispatch(increaseQuantity(id));
+  }
+  const handleTotalPrice = (id) => {
+      dispatch(totalPrice());
+  }
   const [count, setCount] = useState(1);
   const [title] = useState({
     title: 'Proceed to checkout',
@@ -31,7 +41,6 @@ function ListCart() {
           <Grid item xs={6}>
             <Item>
               {products.map((product, id) => (
-                console.log(products),
                 <div className="cart--wrap" key={id}>
                   <form>
                     <table className="table--cart">
@@ -41,10 +50,7 @@ function ListCart() {
                             <span className="lnr lnr-cross"></span>
                           </td>
                           <td className="product--image">
-                          <img
-                              src={product}
-                              alt=""
-                            ></img>
+                            <img src={product.image} alt=""></img>
                           </td>
                           <td className="product--name">
                             <Link to="/detail" style={{ textDecoration: 'none' }}>
@@ -65,6 +71,7 @@ function ListCart() {
                               className="quantity--plus"
                               onClick={() => {
                                 setCount(Math.max(count - 1, 1));
+                                handleDecrease(id);
                               }}
                             >
                               <span className="lnr lnr-chevron-down"></span>
@@ -73,6 +80,7 @@ function ListCart() {
                               className="quantity--minus"
                               onClick={() => {
                                 setCount(count + 1);
+                                handleIncrease();
                               }}
                             >
                               <span className="lnr lnr-chevron-up"></span>
@@ -99,7 +107,10 @@ function ListCart() {
                     <tr className="cart--subtotal">
                       <h5>Subtotal</h5>
                       <td className="subtotal">
-                        <span>$105.00</span>
+                        <span >
+                          
+                          $
+                        </span>
                       </td>
                     </tr>
                     <tr className="shipping">
@@ -108,15 +119,15 @@ function ListCart() {
                         <ul>
                           <li>
                             <input type="radio" name="delivery" value=""></input>
-                            <label >Flat rate</label>
+                            <label>Flat rate</label>
                           </li>
                           <li>
                             <input type="radio" name="delivery" value=""></input>
-                            <label >Free shipping</label>
+                            <label>Free shipping</label>
                           </li>
                           <li>
                             <input type="radio" name="delivery" value=""></input>
-                            <label >Local pickup</label>
+                            <label>Local pickup</label>
                           </li>
                         </ul>
                       </td>
