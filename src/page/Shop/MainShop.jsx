@@ -1,88 +1,114 @@
-import './MainShop.scss';
-// import AddToCart from '../../scss/component/AddToCart';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import "./MainShop.scss";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 // import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import Slider from '@mui/material/Slider';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { getProduct } from '../../redux/productSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import Stack from "@mui/material/Stack";
+import Slider from "@mui/material/Slider";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import SearchIcon from "@mui/icons-material/Search";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { getProduct } from "../../redux/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
-  textAlign: 'center',
+  textAlign: "center",
   color: theme.palette.text.secondary,
-  boxShadow: 'none',
+  boxShadow: "none",
 }));
 
-
 function MainProduct() {
-  const products = useSelector((state) => {
+  let products = useSelector((state) => {
     return state.product.product;
   });
   const [value, setValue] = useState([0, 150]);
-  // const [hover , setHover] = useState(false);
-  const [option, setOption] = useState('');
+  const [data, setData] = useState([]);
+  const [sortPrice, setPrice] = useState("");
+  const [hover, setHover] = useState(false);
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
+  useEffect(() => {
+    setData((oldValue) => [...oldValue, ...products]);
+  }, []);
 
-  const handleOption = (event) => {
-    setOption(event.target.value);
-  };
-  const handleSliderChange = (event, newValue) => {
+  const handleSliderChange = (newValue) => {
     setValue(newValue);
   };
   const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
+    setValue(event.target.value === "" ? "" : Number(event.target.value));
   };
+  const handleSortByPrice = () => {
+    const product = [...products];
+    const sortByPrice = product.sort((a, b) => {
+      return a.price - b.price;
+    });
+    setData(sortByPrice);
+  };
+
   function handleClick() {
-    navigate('/detail');
+    navigate("/detail");
   }
   return (
     <div className="main--product">
-      <Box >
+      <Box>
         <Grid container spacing={4}>
           <Grid flexDirection="column" container item xs={7.5} spacing={0}>
             <Item>
               <div className="main--product__result">
                 <p>Showing 1–9 of 86 results</p>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 230 }}>
-                  <Select value={option} onChange={handleOption} displayEmpty>
-                    <MenuItem value="" className='font--filter'>
+                  <Select
+                    displayEmpty
+                    onChange={(e) => setPrice(e.target.value)}
+                  >
+                    <MenuItem value="" className="font--filter">
                       <em>Default sorting</em>
                     </MenuItem>
-                    <MenuItem value={10}>Sort by popularity</MenuItem>
-                    <MenuItem value={20}>Sort by average rating</MenuItem>
-                    <MenuItem value={30}>Sort by latest</MenuItem>
-                    <MenuItem value={30}>Sort by price: low to high</MenuItem>
-                    <MenuItem value={30}>Sort by price: high to low</MenuItem>
+                    <MenuItem>Sort by name: A to Z</MenuItem>
+                    <MenuItem>Sort by name: Z to A</MenuItem>
+                    <MenuItem value="ascending" onClick={handleSortByPrice}>
+                      Sort by price: low to high
+                    </MenuItem>
+                    <MenuItem value="descending">
+                      Sort by price: high to low
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </div>
             </Item>
             <Item>
               <Stack>
-                <div className="main--product__list" >
-                {products.map((product, id) => (
-                    <div className="swiper-slides" style={{ textDecoration: 'none' }} onClick={handleClick} key={id}>
+                <div className="main--product__list">
+                  {products.map((product, index) => (
+                    <div
+                      className="swiper-slides swiper--shop"
+                      style={{ textDecoration: "none" }}
+                      onClick={handleClick}
+                      key={index}
+                    >
                       <span className="swiper-slides-tag">Sale</span>
                       <img src={product.image} alt="" />
                       <div className="swiper-product">
                         <div className="swiper-product-left">
                           <div className="swiper-product-categories">
-                            <h5 itemProp="name" className="swiper-product-title">
-                              <Link itemProp="url" className="swiper-product-link" to="/detail">
+                            <h5
+                              itemProp="name"
+                              className="swiper-product-title"
+                            >
+                              <Link
+                                itemProp="url"
+                                className="swiper-product-link"
+                                to="/detail"
+                              >
                                 {product.name}
                               </Link>
                             </h5>
@@ -95,14 +121,13 @@ function MainProduct() {
                           <div className="swiper-product-amount">
                             <div className="swiper-product-price">
                               <span className="swiper-product-price-discount"></span>
-                              <span className="product-price">${product.price}</span>
-                               
+                              <span> ${product.price} </span>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                ))}
+                  ))}
                 </div>
               </Stack>
             </Item>
@@ -120,14 +145,18 @@ function MainProduct() {
                   min={0}
                   max={150}
                   sx={{
-                    width: '110%',
-                    color: '#68745c',
-                    height: '1px',
-                    padding: '15px 0',
+                    width: "110%",
+                    color: "#68745c",
+                    height: "1px",
+                    padding: "15px 0",
                   }}
                 />
                 <div className="price--label">
-                  <span name="orderby" className="from" onChange={handleInputChange}>
+                  <span
+                    name="orderby"
+                    className="from"
+                    onChange={handleInputChange}
+                  >
                     Price: ${value[0]} — ${value[1]}
                   </span>
                   <button type="button">Filter</button>
@@ -168,7 +197,9 @@ function MainProduct() {
                             Coco Green
                           </Link>
                         </h6>
-                        <span className="swiper-product-price-discount">$70.00</span>
+                        <span className="swiper-product-price-discount">
+                          $70.00
+                        </span>
                         <span>$50.00</span>
                       </div>
                     </li>
@@ -183,7 +214,10 @@ function MainProduct() {
                       </Link>
                       <div className="widget--content">
                         <h6>
-                          <a itemProp="url" href="https://sante.qodeinteractive.com/product/coco-skies/">
+                          <a
+                            itemProp="url"
+                            href="https://sante.qodeinteractive.com/product/coco-skies/"
+                          >
                             Scrub
                           </a>
                         </h6>

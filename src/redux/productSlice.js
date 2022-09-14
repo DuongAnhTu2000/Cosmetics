@@ -23,8 +23,7 @@ export const addProduct = createAsyncThunk("product/add", async (item) => {
 
 export const updateProduct = createAsyncThunk("product/update", async (update) => {
   try {
-
-    const res = await axios.put(`https://625bf62850128c570209bacc.mockapi.io/product/${update.id}`, update.productUpdate)
+    const res = await axios.put(`https://625bf62850128c570209bacc.mockapi.io/product/${update.id}`, update.newData)
     return res.data
 
   } catch (err) {
@@ -36,12 +35,23 @@ export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
   try {
     const res = await axios.delete(`https://625bf62850128c570209bacc.mockapi.io/product/${id}`);
     return res.data;
-    
+
   } catch (err) {
     console.log(err)
   }
 });
 
+
+export const searchProduct = createAsyncThunk("search", async (name) => {
+  try {
+    const res = await axios.get(`https://625bf62850128c570209bacc.mockapi.io/product?search=shop`, name)
+    console.log(res.data);
+    return res.data;
+
+  } catch (err) {
+    console.log(err)
+  }
+});
 const productSlice = createSlice({
   name: 'product',
   initialState: {
@@ -61,18 +71,16 @@ const productSlice = createSlice({
     builder.addCase(addProduct.pending, (state, action) => {
       state.isFetching = false;
       console.log("false");
-
     })
     builder.addCase(addProduct.fulfilled, (state, action) => {
       state.isFetching = true;
-      console.log("true");
-      console.log('payload == ', action.payload);
     })
 
     builder.addCase(updateProduct.pending, (state, action) => {
       state.isFetching = false;
     })
     builder.addCase(updateProduct.fulfilled, (state, action) => {
+      console.log(state)
       state.isFetching = true;
     })
     builder.addCase(deleteProduct.pending, (state, action) => {
@@ -80,7 +88,14 @@ const productSlice = createSlice({
     })
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.isFetching = true;
+    });
 
+    builder.addCase(searchProduct.pending, (state, action) => {
+      state.isFetching = false;
+    });
+    builder.addCase(searchProduct.fulfilled, (state, action) => {
+      state.isFetching = true;
+      state.product = action.payload;
     });
   }
 })

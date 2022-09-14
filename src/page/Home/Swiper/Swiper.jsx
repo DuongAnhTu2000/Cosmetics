@@ -1,7 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
-import { ReactComponent as ArrowLeft } from '../../assets/svg/ArrowLeft.svg';
-import { ReactComponent as ArrowRight } from '../../assets/svg/ArrowRight.svg';
 
 import './Swiper.scss';
 import 'swiper/css';
@@ -19,10 +17,6 @@ function SwiperJs() {
     <div className="wrap--slide">
       <div className="wrap--title">
         <h4 className="wrap--title__paragraph">Featured Items</h4>
-        {/* <div className="wrap--title__arrow">
-          <ArrowLeft />
-          <ArrowRight />
-        </div> */}
       </div>
       <Swiper
         slidesPerView={4}

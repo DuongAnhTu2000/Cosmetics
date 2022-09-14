@@ -90,6 +90,47 @@ function Admin() {
     <>
       <NavbarAdmin />
       <div className="dashboard">
+      <Stack direction="row" spacing={2}>
+          <form onSubmit={handleAddUser} className="form--adduser">
+          <Button variant="outlined" color="success" type="submit">
+              Add User
+            </Button>
+            <TextField
+              label="User Name"
+              className="input--edituser"
+              name="username"
+              color="success"
+              ref={inputRef}
+              required={true}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <TextField
+              label="Email"
+              className="input--edituser"
+              name="email"
+              color="success"
+              ref={inputRef}
+              required={true}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <TextField
+              label="Birthday"
+              className="input--edituser"
+              name="birthday"
+              color="success"
+              ref={inputRef}
+              required={true}
+              onChange={(e) => {
+                setBirthday(e.target.value);
+              }}
+            />
+           
+          </form>
+        </Stack>
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
@@ -115,12 +156,13 @@ function Admin() {
                       <EditIcon className="icon" />
                     </IconButton>
                     <Modal
-                      aria-labelledby="transition-modal-title"
-                      aria-describedby="transition-modal-description"
                       open={open}
                       onClose={handleClose}
                       closeAfterTransition
                       BackdropComponent={Backdrop}
+                      BackdropProps={{
+                        timeout: 500,
+                      }}
                     >
                       <Fade in={open}>
                         <Box sx={style}>
@@ -205,46 +247,7 @@ function Admin() {
             </TableBody>
           </Table>
         </TableContainer>
-        <Stack direction="row" spacing={2}>
-          <form onSubmit={handleAddUser} className="form--adduser">
-            <TextField
-              label="User Name"
-              className="input--edituser"
-              name="username"
-              color="success"
-              ref={inputRef}
-              required={true}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-            <TextField
-              label="Email"
-              className="input--edituser"
-              name="email"
-              color="success"
-              ref={inputRef}
-              required={true}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <TextField
-              label="Birthday"
-              className="input--edituser"
-              name="birthday"
-              color="success"
-              ref={inputRef}
-              required={true}
-              onChange={(e) => {
-                setBirthday(e.target.value);
-              }}
-            />
-            <Button variant="outlined" color="success" type="submit">
-              Add User
-            </Button>
-          </form>
-        </Stack>
+      
       </div>
       <Footer />
     </>

@@ -1,13 +1,13 @@
 import "./Header.scss";
-import ModalPage from '../component/ModalPage';
+import ModalPage from "../component/ModalPage";
 import { ReactComponent as Cart } from "../../page/assets/svg/Cart.svg";
 import { ReactComponent as Option } from "../../page/assets/svg/Option.svg";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 function Header() {
-
-  const quantity  = useSelector(state => state.cart.quantity);
+  const quantity = useSelector((state) => state.cart.quantity);
+  useEffect(() => {}, [quantity]);
   return (
     <div className="header--container">
       <div className="header--container__left">
@@ -40,7 +40,7 @@ function Header() {
         </Link>
       </div>
       <div className="header--container__right">
-        <ModalPage  />
+        <ModalPage />
         <div className="navbar--home__menu">
           <div className="cart">
             <Link itemProp="url" to="/cart">
@@ -48,11 +48,10 @@ function Header() {
                 <Cart />
                 <span className="cart--count">{quantity}</span>
               </div>
-              
             </Link>
           </div>
         </div>
-        <Option style={{cursor:' pointer'}}/>
+        <Option style={{ cursor: " pointer" }} />
       </div>
     </div>
   );

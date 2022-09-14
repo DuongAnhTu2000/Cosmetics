@@ -6,12 +6,11 @@
     .icon {
         cursor: pointer;
     }
+
     .editUser {
         margin-top: 24px;
     }
-    .updateUser {
 
-    }
     .form--edit {
         gap: 14px;
         display: flex;
@@ -19,27 +18,23 @@
         margin-top: 80px;
 
     }
-    .input--edituser {
-        // gap: 14px;
-
-    }
 
     .form--update {
         display: flex;
         margin-top: 24px;
     }
+
     .form--adduser {
-        display:inline-flex;
-        justify-content: space-between;
+        display: flex;
         gap: 14px;
         margin-top: 24px;
         align-items: center;
-        margin-right: auto;
-        margin-left: auto;
+        margin-bottom: 45px;
     }
+
     .button--update {
         display: flex;
         justify-content: space-between;
-        
+
     }
 }
