@@ -1,4 +1,4 @@
-// @import "../setting/style.scss";
+@import "../setting/variable.scss";
 
 
 .button--style {
@@ -12,7 +12,7 @@
     font-size: 15px;
     opacity: 0.8;
     color: color(text-color-button);
-    // font-family: $font--title;
+    font-family: $font--title;
 
     &:after {
         background-color: color(border-color-button);

@@ -1,34 +1,39 @@
-import './Admin.scss';
-import NavbarAdmin from './NavbarAdmin';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Footer from '../../scss/layout/Footer';
-import { getUser, addUser, updateUser, deleteUser } from '../../redux/userSlice';
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import "./Admin.scss";
+import NavbarAdmin from "./NavbarAdmin";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Footer from "../../scss/layout/Footer";
+import {
+  getUser,
+  addUser,
+  updateUser,
+  deleteUser,
+} from "../../redux/userSlice";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid #dbe3d2',
+  bgcolor: "background.paper",
+  border: "1px solid #dbe3d2",
   opacity: 0.4,
   boxShadow: 4,
   padding: 4,
@@ -38,12 +43,26 @@ function Admin() {
     return state.user.user;
   });
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [birthday, setBirthday] = useState('');
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    birthday: "",
+  });
+  const [addUser, setaddUser] = useState({
+    name: "",
+    email: "",
+    birthday: "",
+  });
+  const [openIndex, setOpenId] = useState();
+  const handleOpen = (index) => {
+    setForm({
+      name: users[index].name,
+      birthday: users[index].birthday,
+      email: users[index].email,
+    });
+    setOpenId(index);
+  };
+  const handleClose = () => setOpenId(null);
 
   const inputRef = useRef(null);
 
@@ -59,23 +78,22 @@ function Admin() {
   const handleAddUser = async (e) => {
     e.preventDefault();
     const newUser = {
-      name,
-      email,
-      birthday,
+      ...form,
     };
     await dispatch(addUser(newUser));
     await handleLoadUser();
-    e.target.reset();
-    console.log('reset');
+    setForm({
+      name: "",
+      email: "",
+      birthday: "",
+    });
   };
 
   const handleUpdateUser = (id) => {
     const dataUpdate = {
       id,
       newData: {
-        name,
-        email,
-        birthday,
+        ...form,
       },
     };
     dispatch(updateUser(dataUpdate));
@@ -90,9 +108,9 @@ function Admin() {
     <>
       <NavbarAdmin />
       <div className="dashboard">
-      <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2}>
           <form onSubmit={handleAddUser} className="form--adduser">
-          <Button variant="outlined" color="success" type="submit">
+            <Button variant="outlined" color="success" type="submit">
               Add User
             </Button>
             <TextField
@@ -102,8 +120,11 @@ function Admin() {
               color="success"
               ref={inputRef}
               required={true}
+              value={addUser.name}
               onChange={(e) => {
-                setName(e.target.value);
+                setaddUser((state) => {
+                  return { ...state, name: e.target.value };
+                });
               }}
             />
             <TextField
@@ -113,8 +134,11 @@ function Admin() {
               color="success"
               ref={inputRef}
               required={true}
+              value={addUser.email}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setaddUser((state) => {
+                  return { ...state, email: e.target.value };
+                });
               }}
             />
             <TextField
@@ -124,11 +148,13 @@ function Admin() {
               color="success"
               ref={inputRef}
               required={true}
+              value={addUser.birthday}
               onChange={(e) => {
-                setBirthday(e.target.value);
+                setaddUser((state) => {
+                  return { ...state, birthday: e.target.value };
+                });
               }}
             />
-           
           </form>
         </Stack>
         <TableContainer component={Paper}>
@@ -143,8 +169,11 @@ function Admin() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user) => (
-                <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={user.id}>
+              {users.map((user, index) => (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  key={user.id}
+                >
                   <TableCell component="th" scope="row">
                     {user.id}
                   </TableCell>
@@ -152,11 +181,11 @@ function Admin() {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.birthday}</TableCell>
                   <TableCell>
-                    <IconButton onClick={handleOpen}>
+                    <IconButton onClick={() => handleOpen(index)}>
                       <EditIcon className="icon" />
                     </IconButton>
                     <Modal
-                      open={open}
+                      open={index === openIndex}
                       onClose={handleClose}
                       closeAfterTransition
                       BackdropComponent={Backdrop}
@@ -164,7 +193,7 @@ function Admin() {
                         timeout: 500,
                       }}
                     >
-                      <Fade in={open}>
+                      <Fade in={index === openIndex}>
                         <Box sx={style}>
                           <div className="form--update">
                             <TextField
@@ -176,9 +205,11 @@ function Admin() {
                               color="success"
                               className="form--update"
                               variant="outlined"
-                              value={name}
+                              value={form.name}
                               onChange={(e) => {
-                                setName(e.target.value);
+                                setForm((state) => {
+                                  return { ...state, name: e.target.value };
+                                });
                               }}
                             />
                             <TextField
@@ -188,11 +219,13 @@ function Admin() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={email}
+                              value={form.email}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setEmail(e.target.value);
+                                setForm((state) => {
+                                  return { ...state, email: e.target.value };
+                                });
                               }}
                             />
                             <TextField
@@ -204,16 +237,24 @@ function Admin() {
                               ref={inputRef}
                               color="success"
                               className="form--update"
-                              value={birthday}
+                              value={form.birthday}
                               onChange={(e) => {
-                                setBirthday(e.target.value);
+                                setForm((state) => {
+                                  return {
+                                    ...state,
+                                    birthday: e.target.value,
+                                  };
+                                });
                               }}
                             />
                           </div>
                           <div className="button--update">
-                            <Button onClick={handleClose} variant="outlined" 
-                            color="success" 
-                            fullWidth={true}>
+                            <Button
+                              onClick={handleClose}
+                              variant="outlined"
+                              color="success"
+                              fullWidth={true}
+                            >
                               Cancel
                             </Button>
                             <Button
@@ -247,7 +288,6 @@ function Admin() {
             </TableBody>
           </Table>
         </TableContainer>
-      
       </div>
       <Footer />
     </>

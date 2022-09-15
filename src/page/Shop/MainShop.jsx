@@ -3,9 +3,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-// import Pagination from '@mui/material/Pagination';
 import Stack from "@mui/material/Stack";
-import Slider from "@mui/material/Slider";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -28,7 +26,7 @@ function MainProduct() {
   });
   const [value, setValue] = useState([0, 150]);
   const [data, setData] = useState([]);
-  const [sortPrice, setPrice] = useState("");
+  const [sortPrice, setSortPrice] = useState("");
   const [hover, setHover] = useState(false);
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,20 +36,37 @@ function MainProduct() {
   }, [dispatch]);
   useEffect(() => {
     setData((oldValue) => [...oldValue, ...products]);
-  }, []);
+  }, [products]);
 
-  const handleSliderChange = (newValue) => {
+  const handleSliderChange = (e, newValue) => {
+    // e.target.value
     setValue(newValue);
   };
   const handleInputChange = (event) => {
     setValue(event.target.value === "" ? "" : Number(event.target.value));
   };
-  const handleSortByPrice = () => {
+  const handleSortFilter = (action) => {
+    console.log({ action });
     const product = [...products];
-    const sortByPrice = product.sort((a, b) => {
-      return a.price - b.price;
-    });
-    setData(sortByPrice);
+    switch (action) {
+      case "default":
+        setData(() => [...product]);
+        break;
+      case "ascending":
+        const ascending = product.sort((a, b) => {
+          return a.price - b.price;
+        });
+        setData(() => [...ascending]);
+        break;
+      case "descending":
+        const descending = product.sort((a, b) => {
+          return b.price - a.price;
+        });
+        setData(() => [...descending]);
+        break;
+      default:
+        break;
+    }
   };
 
   function handleClick() {
@@ -66,19 +81,24 @@ function MainProduct() {
               <div className="main--product__result">
                 <p>Showing 1–9 of 86 results</p>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 230 }}>
-                  <Select
-                    displayEmpty
-                    onChange={(e) => setPrice(e.target.value)}
-                  >
-                    <MenuItem value="" className="font--filter">
+                  <Select displayEmpty>
+                    <MenuItem
+                      value="Default sorting"
+                      className="font--filter"
+                      onClick={() => handleSortFilter("default")}
+                    >
                       <em>Default sorting</em>
                     </MenuItem>
-                    <MenuItem>Sort by name: A to Z</MenuItem>
-                    <MenuItem>Sort by name: Z to A</MenuItem>
-                    <MenuItem value="ascending" onClick={handleSortByPrice}>
+                    <MenuItem
+                      value="ascending"
+                      onClick={() => handleSortFilter("ascending")}
+                    >
                       Sort by price: low to high
                     </MenuItem>
-                    <MenuItem value="descending">
+                    <MenuItem
+                      value="descending"
+                      onClick={() => handleSortFilter("descending")}
+                    >
                       Sort by price: high to low
                     </MenuItem>
                   </Select>
@@ -88,7 +108,7 @@ function MainProduct() {
             <Item>
               <Stack>
                 <div className="main--product__list">
-                  {products.map((product, index) => (
+                  {data.map((product, index) => (
                     <div
                       className="swiper-slides swiper--shop"
                       style={{ textDecoration: "none" }}
@@ -136,7 +156,7 @@ function MainProduct() {
             <Item>
               <div className="price--filter">
                 <h4>Price Filter</h4>
-                <Slider
+                {/* <Slider
                   value={value}
                   onChange={handleSliderChange}
                   disableSwap
@@ -159,8 +179,8 @@ function MainProduct() {
                   >
                     Price: ${value[0]} — ${value[1]}
                   </span>
-                  <button type="button">Filter</button>
-                </div>
+                  <button type="button" onC>Filter</button>
+                </div> */}
                 <div className="widget--products">
                   <h4>Featured Products</h4>
                   <ul className="widget--products__list">

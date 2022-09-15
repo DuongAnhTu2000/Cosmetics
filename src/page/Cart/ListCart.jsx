@@ -96,7 +96,7 @@ function ListCart() {
                             <span
                               className="quantity--plus"
                               onClick={() => {
-                                setCount(Math.max(count - 1, 1));
+                                setCount(Math.max(count - 1, 0));
                                 handleDecrease(product?.id, product.price);
                               }}
                             >
@@ -135,6 +135,7 @@ function ListCart() {
                       <td className="subtotal">
                         <span>
                           {products.reduce((total, cur) => {
+                            // console.log("abc");
                             return total + cur.totalPrice;
                           }, 0)}
                           $

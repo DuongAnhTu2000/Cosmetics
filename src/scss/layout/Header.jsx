@@ -3,11 +3,20 @@ import ModalPage from "../component/ModalPage";
 import { ReactComponent as Cart } from "../../page/assets/svg/Cart.svg";
 import { ReactComponent as Option } from "../../page/assets/svg/Option.svg";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 function Header() {
-  const quantity = useSelector((state) => state.cart.quantity);
-  useEffect(() => {}, [quantity]);
+  // const dispatch = useDispatch();
+  // const quantity = useSelector((state) => state.cart.quantity);
+  
+  let countNumber = useSelector((state) => {
+    console.log({ state });
+    return state.cart?.products[0]?.count || 0;
+  });
+  const [number, setNumber] = useState(countNumber);
+  useEffect(() => {
+    setNumber(countNumber);
+  }, [countNumber]);
   return (
     <div className="header--container">
       <div className="header--container__left">
@@ -46,7 +55,7 @@ function Header() {
             <Link itemProp="url" to="/cart">
               <div className="cart__button">
                 <Cart />
-                <span className="cart--count">{quantity}</span>
+                <span className="cart--count">{number}</span>
               </div>
             </Link>
           </div>
