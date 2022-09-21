@@ -48,7 +48,7 @@ function Admin() {
     email: "",
     birthday: "",
   });
-  const [addUser, setaddUser] = useState({
+  const [formaddUser, setformAddUser] = useState({
     name: "",
     email: "",
     birthday: "",
@@ -78,8 +78,9 @@ function Admin() {
   const handleAddUser = async (e) => {
     e.preventDefault();
     const newUser = {
-      ...form,
+      ...formaddUser,
     };
+    console.log("add");
     await dispatch(addUser(newUser));
     await handleLoadUser();
     setForm({
@@ -104,6 +105,8 @@ function Admin() {
     dispatch(deleteUser(id));
     dispatch(getUser());
   };
+
+  
   return (
     <>
       <NavbarAdmin />
@@ -120,9 +123,9 @@ function Admin() {
               color="success"
               ref={inputRef}
               required={true}
-              value={addUser.name}
+              value={formaddUser.name}
               onChange={(e) => {
-                setaddUser((state) => {
+                setformAddUser((state) => {
                   return { ...state, name: e.target.value };
                 });
               }}
@@ -134,9 +137,9 @@ function Admin() {
               color="success"
               ref={inputRef}
               required={true}
-              value={addUser.email}
+              value={formaddUser.email}
               onChange={(e) => {
-                setaddUser((state) => {
+                setformAddUser((state) => {
                   return { ...state, email: e.target.value };
                 });
               }}
@@ -148,9 +151,9 @@ function Admin() {
               color="success"
               ref={inputRef}
               required={true}
-              value={addUser.birthday}
+              value={formaddUser.birthday}
               onChange={(e) => {
-                setaddUser((state) => {
+                setformAddUser((state) => {
                   return { ...state, birthday: e.target.value };
                 });
               }}

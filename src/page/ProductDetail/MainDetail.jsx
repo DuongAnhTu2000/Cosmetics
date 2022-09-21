@@ -46,7 +46,6 @@ const theme = createTheme({
   },
 });
 function MainDetail() {
-  const products = useSelector((state) => state.cart.products);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("1");
   let navigate = useNavigate();
@@ -84,7 +83,7 @@ function MainDetail() {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleChange = (e, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
 

@@ -1,15 +1,17 @@
 import "./NavbarHome.scss";
 import { ReactComponent as Cart } from "../../assets/svg/Cart.svg";
 import { Link} from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useSelector } from 'react-redux';
 
 function NavbarHome() {
-  const quantity = useSelector(state => state.cart.quantity);
-
+  let countNumber = useSelector((state) => {
+    return state.cart?.products[0]?.count || 0;
+  });
+  const [number, setNumber] = useState(countNumber);
   useEffect(() => {
-    
-  },[])
+    setNumber(countNumber);
+  }, [countNumber]);
   return (
     <div className="navbar--home">
       <div className="navbar--home__icon">
@@ -41,7 +43,7 @@ function NavbarHome() {
             <Link itemProp="url" to="/cart">
               <div className="cart__button " >
                 <Cart />
-                <span className="cart--count">{quantity}</span>
+                <span className="cart--count">{number}</span>
               </div>
             </Link>
           </div>

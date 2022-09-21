@@ -23,11 +23,10 @@ const NavbarAdmin = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  function handleLogOut() {
-    navigate('/');
-    localStorage.removeItem("user")
-    console.log("logout")
-  }
+  const handleLogOut = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <>

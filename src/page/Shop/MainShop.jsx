@@ -1,4 +1,5 @@
 import "./MainShop.scss";
+import "../../scss/component/AddToCart";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -8,10 +9,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { getProduct } from "../../redux/productSlice";
+import { addtoCart } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import AddToCart from "../../scss/component/AddToCart";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -24,11 +27,7 @@ function MainProduct() {
   let products = useSelector((state) => {
     return state.product.product;
   });
-  const [value, setValue] = useState([0, 150]);
   const [data, setData] = useState([]);
-  const [sortPrice, setSortPrice] = useState("");
-  const [hover, setHover] = useState(false);
-  let navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,15 +37,17 @@ function MainProduct() {
     setData((oldValue) => [...oldValue, ...products]);
   }, [products]);
 
-  const handleSliderChange = (e, newValue) => {
-    // e.target.value
-    setValue(newValue);
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    console.log("add to cart");
+    const newItem = {
+      ...products,
+    };
+    dispatch(addtoCart(newItem));
+    console.log("them san pham ", newItem);
   };
-  const handleInputChange = (event) => {
-    setValue(event.target.value === "" ? "" : Number(event.target.value));
-  };
+
   const handleSortFilter = (action) => {
-    console.log({ action });
     const product = [...products];
     switch (action) {
       case "default":
@@ -69,9 +70,6 @@ function MainProduct() {
     }
   };
 
-  function handleClick() {
-    navigate("/detail");
-  }
   return (
     <div className="main--product">
       <Box>
@@ -79,15 +77,18 @@ function MainProduct() {
           <Grid flexDirection="column" container item xs={7.5} spacing={0}>
             <Item>
               <div className="main--product__result">
-                <p>Showing 1–9 of 86 results</p>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 230 }}>
-                  <Select displayEmpty>
+                  <Select
+                    displayEmpty
+                    defaultValue="Default sorting"
+                    className="product--filter"
+                  >
                     <MenuItem
                       value="Default sorting"
                       className="font--filter"
                       onClick={() => handleSortFilter("default")}
                     >
-                      <em>Default sorting</em>
+                      Default sorting
                     </MenuItem>
                     <MenuItem
                       value="ascending"
@@ -112,11 +113,11 @@ function MainProduct() {
                     <div
                       className="swiper-slides swiper--shop"
                       style={{ textDecoration: "none" }}
-                      onClick={handleClick}
                       key={index}
                     >
-                      <span className="swiper-slides-tag">Sale</span>
-                      <img src={product.image} alt="" />
+                      <Link to="/detail">
+                        <img src={product.image} alt="" />
+                      </Link>
                       <div className="swiper-product">
                         <div className="swiper-product-left">
                           <div className="swiper-product-categories">
@@ -143,6 +144,7 @@ function MainProduct() {
                               <span className="swiper-product-price-discount"></span>
                               <span> ${product.price} </span>
                             </div>
+                            <AddToCart onClick={handleAddToCart} />
                           </div>
                         </div>
                       </div>
@@ -155,33 +157,11 @@ function MainProduct() {
           <Grid item xs={2.5}>
             <Item>
               <div className="price--filter">
-                <h4>Price Filter</h4>
-                {/* <Slider
-                  value={value}
-                  onChange={handleSliderChange}
-                  disableSwap
-                  step={10}
-                  size="small"
-                  min={0}
-                  max={150}
-                  sx={{
-                    width: "110%",
-                    color: "#68745c",
-                    height: "1px",
-                    padding: "15px 0",
-                  }}
-                />
-                <div className="price--label">
-                  <span
-                    name="orderby"
-                    className="from"
-                    onChange={handleInputChange}
-                  >
-                    Price: ${value[0]} — ${value[1]}
-                  </span>
-                  <button type="button" onC>Filter</button>
-                </div> */}
                 <div className="widget--products">
+                  <div className="search--product">
+                    <SearchIcon />
+                    <input type="search"></input>
+                  </div>
                   <h4>Featured Products</h4>
                   <ul className="widget--products__list">
                     <li className="widget--products__list__item">

@@ -10,7 +10,6 @@ function Header() {
   // const quantity = useSelector((state) => state.cart.quantity);
   
   let countNumber = useSelector((state) => {
-    console.log({ state });
     return state.cart?.products[0]?.count || 0;
   });
   const [number, setNumber] = useState(countNumber);

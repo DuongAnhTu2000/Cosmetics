@@ -7,12 +7,17 @@
     &__result {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-bottom: 40px;
         background-color: none !important;
         padding: -8px !important;
         font-family: $font--primary;
         align-items: center;
+
+        .product--filter {
+            font-family: $font--primary;
+            text-align: left;
+        }
     }
 
     &__list {
@@ -20,9 +25,10 @@
         align-items: center;
         gap: 30px;
         flex-wrap: wrap;
-         flex-direction: row; 
+        flex-direction: row;
         justify-content: space-between;
     }
+
     .swiper--shop {
         width: 30% !important;
     }
@@ -37,7 +43,7 @@
             font-weight: 600;
             color: color(text-title);
             margin-bottom: 10px;
-    }
+        }
 
         .MuiSlider-thumb {
             width: 8px;
@@ -95,7 +101,12 @@
 
 
         .widget--products {
-            margin: 42px 0 42px 0;
+            margin-bottom: 42px;
+
+            .search--product {
+                margin-bottom: 42px;
+                margin-top: 16px;
+            }
 
             &__list {
                 display: flex;
