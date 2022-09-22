@@ -106,9 +106,12 @@ function ModalPage() {
           <span className="lnr lnr-lock " />
 
           {isLoggedIn ? (
+            <> 
+            
             <span className="header--text" onClick={logOut}>
               Log Out
             </span>
+            </>
             
           ) : (
             <span className="header--text" onClick={handleOpen}>

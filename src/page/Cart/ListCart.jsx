@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decreaseQuantity,
@@ -23,13 +23,23 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ListCart() {
   const products = useSelector((state) => state.cart.products);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    const totalPrice = products.reduce((total, cur) => {
+      // console.log("abc");
+      return total + cur.totalPrice;
+    }, 0);
+    setTotalPrice(totalPrice);
+  }, [products]);
+
   console.log("products", products);
   const dispatch = useDispatch();
   const handleDecrease = (id, price) => {
     dispatch(
       decreaseQuantity({
         id,
-        price,
+        price
       }),
       console.log(increaseQuantity())
     );
@@ -38,7 +48,7 @@ function ListCart() {
     dispatch(
       increaseQuantity({
         id,
-        price,
+        price
       }),
       console.log(increaseQuantity())
     );
@@ -47,7 +57,6 @@ function ListCart() {
     dispatch(removeItem(id));
   };
   const listItem = JSON.parse(localStorage.getItem("cartItems"));
-  const [count, setCount] = useState(listItem[0].count || 0);
   const [title] = useState({
     title: "Proceed to checkout",
   });
@@ -88,7 +97,7 @@ function ListCart() {
                             <input
                               type="text"
                               name="quantity"
-                              value={count}
+                              value={product?.count}
                               size="4"
                               placeholder=""
                               className="input--text"
@@ -96,7 +105,6 @@ function ListCart() {
                             <span
                               className="quantity--plus"
                               onClick={() => {
-                                setCount(Math.max(count - 1, 0));
                                 handleDecrease(product?.id, product.price);
                               }}
                             >
@@ -105,7 +113,6 @@ function ListCart() {
                             <span
                               className="quantity--minus"
                               onClick={() => {
-                                setCount(count + 1);
                                 handleIncrease(product?.id, product.price);
                               }}
                             >
@@ -127,19 +134,13 @@ function ListCart() {
           <Grid item xs={3}>
             <Item>
               <div className="cart--totals">
-                <h2>Cart totals</h2>
+                <h2>Cart Totals</h2>
                 <table className="totals--price">
                   <tbody>
                     <tr className="cart--subtotal">
                       <h5>Subtotal</h5>
                       <td className="subtotal">
-                        <span>
-                          {products.reduce((total, cur) => {
-                            // console.log("abc");
-                            return total + cur.totalPrice;
-                          }, 0)}
-                          $
-                        </span>
+                        <span>${totalPrice}</span>
                       </td>
                     </tr>
                     <tr className="shipping">
@@ -175,12 +176,7 @@ function ListCart() {
                     </tr>
                     <tr className="order--total">
                       <h5>Total</h5>
-                      <h5>
-                        $
-                        {products.reduce((total, cur) => {
-                          return total + cur.totalPrice;
-                        }, 0)}
-                      </h5>
+                      <h5>${totalPrice}</h5>
                     </tr>
                     <tr className="checkout">
                       <ButonStyle

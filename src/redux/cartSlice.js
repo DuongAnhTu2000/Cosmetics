@@ -9,8 +9,6 @@ const initialState = {
 };
 
 
-
-
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -47,6 +45,9 @@ const cartSlice = createSlice({
         if (item.id === action.payload.id) {
           if (item.count < 1) {
             return
+          } else if (item.count < 0) {
+            state.products = removeItem;
+
           }
           item.count -= 1
           item.totalPrice = item.count * item.price

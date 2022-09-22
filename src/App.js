@@ -5,7 +5,7 @@ import ProductDetail from './page/ProductDetail/ProductDetail';
 import Admin from './page/Admin/Admin';
 import ProductList from './page/Admin/ProductList';
 import { Routes, Route,BrowserRouter } from "react-router-dom";
-import ProtectedRoute from './page/ProtectedRoute';
+import ProtectedRoute from './Utils/ProtectedRoute';
 
 function App() {
 

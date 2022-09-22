@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { getProduct } from "../../redux/productSlice";
 import { addtoCart } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,14 +28,43 @@ function MainProduct() {
     return state.product.product;
   });
   const [data, setData] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [filterValue, setFilterValue] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
+
   useEffect(() => {
-    setData((oldValue) => [...oldValue, ...products]);
-  }, [products]);
+    let productClone = [...products];
+    if (searchValue !== "") {
+      productClone = productClone.filter((item) =>
+        item.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    }
+    if (filterValue !== "") {
+      switch (filterValue) {
+        case "default":
+          productClone = productClone;
+          break;
+        case "ascending":
+          productClone = productClone.sort((a, b) => {
+            return a.price - b.price;
+          });
+          break;
+        case "descending":
+          productClone = productClone.sort((a, b) => {
+            return b.price - a.price;
+          });
+          break;
+        default:
+          productClone = productClone;
+          break;
+      }
+    }
+    setData(productClone);
+  }, [products, searchValue, filterValue]);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -45,29 +74,6 @@ function MainProduct() {
     };
     dispatch(addtoCart(newItem));
     console.log("them san pham ", newItem);
-  };
-
-  const handleSortFilter = (action) => {
-    const product = [...products];
-    switch (action) {
-      case "default":
-        setData(() => [...product]);
-        break;
-      case "ascending":
-        const ascending = product.sort((a, b) => {
-          return a.price - b.price;
-        });
-        setData(() => [...ascending]);
-        break;
-      case "descending":
-        const descending = product.sort((a, b) => {
-          return b.price - a.price;
-        });
-        setData(() => [...descending]);
-        break;
-      default:
-        break;
-    }
   };
 
   return (
@@ -82,24 +88,15 @@ function MainProduct() {
                     displayEmpty
                     defaultValue="Default sorting"
                     className="product--filter"
+                    onChange={(e) => setFilterValue(e.target.value)}
                   >
-                    <MenuItem
-                      value="Default sorting"
-                      className="font--filter"
-                      onClick={() => handleSortFilter("default")}
-                    >
+                    <MenuItem value="Default sorting" className="font--filter">
                       Default sorting
                     </MenuItem>
-                    <MenuItem
-                      value="ascending"
-                      onClick={() => handleSortFilter("ascending")}
-                    >
+                    <MenuItem value="ascending">
                       Sort by price: low to high
                     </MenuItem>
-                    <MenuItem
-                      value="descending"
-                      onClick={() => handleSortFilter("descending")}
-                    >
+                    <MenuItem value="descending">
                       Sort by price: high to low
                     </MenuItem>
                   </Select>
@@ -144,7 +141,7 @@ function MainProduct() {
                               <span className="swiper-product-price-discount"></span>
                               <span> ${product.price} </span>
                             </div>
-                            <AddToCart onClick={handleAddToCart} />
+                            <AddToCart product={product} onClick={handleAddToCart} />
                           </div>
                         </div>
                       </div>
@@ -160,7 +157,10 @@ function MainProduct() {
                 <div className="widget--products">
                   <div className="search--product">
                     <SearchIcon />
-                    <input type="search"></input>
+                    <input
+                      type="text"
+                      onChange={(e) => setSearchValue(e.target.value)}
+                    ></input>
                   </div>
                   <h4>Featured Products</h4>
                   <ul className="widget--products__list">
