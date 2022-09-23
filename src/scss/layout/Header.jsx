@@ -7,7 +7,12 @@ import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 function Header() {
   let countNumber = useSelector((state) => {
-    return state.cart?.products[0]?.count || 0;
+    console.log(state.cart);
+    let totalCount = 0;
+    state.cart.products.forEach((product) => {
+      totalCount += product.count;
+    });
+    return totalCount || 0;
   });
   const [number, setNumber] = useState(countNumber);
   useEffect(() => {

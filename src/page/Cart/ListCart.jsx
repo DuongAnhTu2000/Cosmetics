@@ -147,7 +147,7 @@ function ListCart() {
                             <input
                               type="radio"
                               name="delivery"
-                              value=""
+                              defaultChecked={true}
                             ></input>
                             <label>Flat rate</label>
                           </li>
@@ -155,7 +155,7 @@ function ListCart() {
                             <input
                               type="radio"
                               name="delivery"
-                              value=""
+                              defaultChecked={true}
                             ></input>
                             <label>Free shipping</label>
                           </li>
@@ -163,7 +163,7 @@ function ListCart() {
                             <input
                               type="radio"
                               name="delivery"
-                              value=""
+                              defaultChecked={true}
                             ></input>
                             <label>Local pickup</label>
                           </li>
