@@ -1,5 +1,5 @@
 import "./Admin.scss";
-import NavbarAdmin from "./NavbarAdmin";
+import NavbarManager from "./NavbarManager";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Table from "@mui/material/Table";
@@ -53,7 +53,7 @@ function Admin() {
     email: "",
     birthday: "",
   });
-  const [openIndex, setOpenId] = useState();
+  const [openId, setOpenId] = useState();
   const handleOpen = (index) => {
     setForm({
       name: users[index].name,
@@ -106,10 +106,9 @@ function Admin() {
     dispatch(getUser());
   };
 
-  
   return (
     <>
-      <NavbarAdmin />
+      <NavbarManager />
       <div className="dashboard">
         <Stack direction="row" spacing={2}>
           <form onSubmit={handleAddUser} className="form--adduser">
@@ -161,7 +160,7 @@ function Admin() {
           </form>
         </Stack>
         <TableContainer component={Paper}>
-          <Table aria-label="simple table">
+          <Table aria-label="simple table" className="table-style">
             <TableHead>
               <TableRow>
                 <TableCell>STT</TableCell>
@@ -188,7 +187,7 @@ function Admin() {
                       <EditIcon className="icon" />
                     </IconButton>
                     <Modal
-                      open={index === openIndex}
+                      open={index === openId}
                       onClose={handleClose}
                       closeAfterTransition
                       BackdropComponent={Backdrop}
@@ -196,7 +195,7 @@ function Admin() {
                         timeout: 500,
                       }}
                     >
-                      <Fade in={index === openIndex}>
+                      <Fade in={index === openId}>
                         <Box sx={style}>
                           <div className="form--update">
                             <TextField

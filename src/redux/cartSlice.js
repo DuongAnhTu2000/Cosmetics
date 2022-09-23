@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const items = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
-console.log({ items })
 const initialState = {
   products: items,
   quantity: items?.length ?? 0,
@@ -19,19 +18,18 @@ const cartSlice = createSlice({
       console.log("them san pham:", action.payload)
       console.log("state: ", state.quantity)
       let itemList = JSON.parse(localStorage.getItem('cartItems')) || []
-      // Kiem tra san pham co ton tai trong cart
+      // check item has been exist in cart
       const matchItemIndex = itemList?.findIndex(item => item.id === action.payload.id)
       console.log('matchItemIndex,itemList', matchItemIndex, itemList)
-      // Neu san pham khong co trong cart thi tao moi
+      // if cart empty,push item to array
       if (matchItemIndex === -1) {
         itemList.push(action.payload)
       }
-      // Neu san pham da ton tai thi cap nhat so luong
+      // if item has been exist,update count
       else {
         itemList[matchItemIndex].count += +action.payload.count
       }
       state.products = itemList
-      // setNumber(itemlist)
       localStorage.setItem("cartItems", JSON.stringify(itemList));
     },
     removeItem: (state, action) => {
@@ -41,11 +39,12 @@ const cartSlice = createSlice({
       return state
     },
     decreaseQuantity: (state, action) => {
-      const newItemList = state.products.forEach((item, index) => {
+      state.products.forEach((item, index) => {
         if (item.id === action.payload.id) {
           if (item.count < 1) {
             return
-          } else if (item.count < 0) {
+          } else if (item.count === 0) {
+            
             state.products = removeItem;
 
           }
@@ -53,21 +52,18 @@ const cartSlice = createSlice({
           item.totalPrice = item.count * item.price
         }
       })
-      console.log("newItemList", newItemList)
       localStorage.setItem("cartItems", JSON.stringify(state.products));
     },
     increaseQuantity: (state, action) => {
-      console.log("action", action)
-      const newItemList = state.products.forEach((item, index) => {
-
+      state.products.forEach((item, index) => {
         if (item.id === action.payload.id) {
           item.count += 1
           item.totalPrice = item.count * item.price
         }
       })
-
-      console.log("newItemList", newItemList)
+      localStorage.setItem("cartItems", JSON.stringify(state.products));
     },
+
   },
 
 })

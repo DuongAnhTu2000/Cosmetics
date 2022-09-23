@@ -39,7 +39,6 @@ function ModalPage() {
   const [value, setValue] = useState("1");
   const navigate = useNavigate();
 
-  console.log("auth", localStorage.getItem("isAuthenticated"));
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -76,22 +75,19 @@ function ModalPage() {
       userData.username === "admin" &&
       userData.password === "123456"
     ) {
-      //Signin Success
       localStorage.setItem("isAuthenticated", "true");
-      navigate("/admin");
-      console.log("success");
+      navigate("/");
+      window.location.reload();
     } else {
       //If credentials entered is invalid
 
-      setErrorMessage((prevState) => ({ value: "Invalid username/password" }));
-      console.log("error");
+      setErrorMessage(() => ({ value: "Invalid username/password" }));
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Button
-        // onClick={handleOpen}
         disableRipple={true}
         sx={{
           textTransform: "none",

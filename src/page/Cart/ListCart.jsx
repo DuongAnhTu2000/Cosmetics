@@ -27,36 +27,32 @@ function ListCart() {
 
   useEffect(() => {
     const totalPrice = products.reduce((total, cur) => {
-      // console.log("abc");
-      return total + cur.totalPrice;
+      return total + cur.price* cur.count;
     }, 0);
     setTotalPrice(totalPrice);
   }, [products]);
 
-  console.log("products", products);
   const dispatch = useDispatch();
   const handleDecrease = (id, price) => {
     dispatch(
       decreaseQuantity({
         id,
-        price
-      }),
-      console.log(increaseQuantity())
+        price,
+      })
     );
   };
   const handleIncrease = (id, price) => {
     dispatch(
       increaseQuantity({
         id,
-        price
-      }),
-      console.log(increaseQuantity())
+        price,
+      })
     );
   };
   const handleDelete = (id) => {
     dispatch(removeItem(id));
   };
-  const listItem = JSON.parse(localStorage.getItem("cartItems"));
+  // const listItem = JSON.parse(localStorage.getItem("cartItems"));
   const [title] = useState({
     title: "Proceed to checkout",
   });

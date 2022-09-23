@@ -1,5 +1,5 @@
 import "./ProductList.scss";
-import NavbarAdmin from "./NavbarAdmin";
+import NavbarManager from "./NavbarManager";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Table from "@mui/material/Table";
@@ -17,7 +17,6 @@ import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Footer from "../../scss/layout/Footer";
 import {
   getProduct,
@@ -45,14 +44,33 @@ function ProductList() {
   const products = useSelector((state) => {
     return state.product.product;
   });
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [categories, setCategories] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [form, setForm] = useState({
+    image: "",
+    name: "",
+    categories: "",
+    price: "",
+    description: "",
+  });
+  const [formAddProduct, setFormAddProduct] = useState({
+    image: "",
+    name: "",
+    categories: "",
+    price: "",
+    description: "",
+  });
+  const [avatar, setAvatar] = useState("");
+  const [openId, setOpenId] = useState();
+  const handleOpen = (index) => {
+    setForm({
+      image: products[index].image,
+      name: products[index].name,
+      categories: products[index].categories,
+      price: products[index].price,
+      description: products[index].description,
+    });
+    setOpenId(index);
+  };
+  const handleClose = () => setOpenId(null);
 
   const inputRef = useRef(null);
   const dispatch = useDispatch();
@@ -64,35 +82,40 @@ function ProductList() {
   const handleLoadProduct = () => {
     dispatch(getProduct());
   };
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    file.preview = URL.createObjectURL(file);
+    setAvatar(file);
+  };
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const newProduct = {
-      image,
-      name,
-      categories,
-      price,
-      description,
+      ...formAddProduct,
     };
     await dispatch(addProduct(newProduct));
     await handleLoadProduct();
-    e.target.reset();
+    setForm({
+      image: "",
+      name: "",
+      categories: "",
+      price: "",
+      description: "",
+    });
+  
+    // e.target.reset();
   };
 
   const handleUpdateProduct = (id) => {
     const productUpdate = {
       id,
       newData: {
-        image,
-        name,
-        categories,
-        price,
-        description,
+        ...form,
       },
     };
     console.log(productUpdate, "productUpdate");
     dispatch(updateProduct(productUpdate));
     dispatch(getProduct());
-    console.log(getProduct());
   };
 
   const handleDeleteProduct = (id) => {
@@ -102,7 +125,7 @@ function ProductList() {
 
   return (
     <>
-      <NavbarAdmin />
+      <NavbarManager />
       <div className="dashboard--product">
         <Stack direction="row" spacing={2}>
           <form className="form--addProduct">
@@ -119,54 +142,75 @@ function ProductList() {
               className="btn--upload"
               variant="outlined"
               component="label"
+              value={formAddProduct.image}
               fullWidth={true}
               color="success"
               onChange={(e) => {
-                setImage(e.target.value);
+                setFormAddProduct((state) => {
+                  return { ...state, image: e.target.value };
+                });
               }}
             >
               Upload
-              <input hidden accept="image/*" name="image" type="file" />
-              <PhotoCamera />
+              <input
+                hidden
+                accept="image/*"
+                name="image"
+                type="file"
+                onChange={handleImage}
+              />
+              {avatar && <img src={avatar.preview} alt="" width="50%" />}
             </Button>
             <TextField
               label="Name"
               name="Name"
               color="success"
+              value={formAddProduct.name}
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setName(e.target.value);
+                setFormAddProduct((state) => {
+                  return { ...state, name: e.target.value };
+                });
               }}
             />
             <TextField
               label="Categories"
               name="categories"
               color="success"
+              value={formAddProduct.categories}
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setCategories(e.target.value);
+                setFormAddProduct((state) => {
+                  return { ...state, categories: e.target.value };
+                });
               }}
             />
             <TextField
               label="Price"
               name="price"
               color="success"
+              value={formAddProduct.price}
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setPrice(e.target.value);
+                setFormAddProduct((state) => {
+                  return { ...state, price: e.target.value };
+                });
               }}
             />
             <TextField
               label="Description"
               name="description"
               color="success"
+              value={formAddProduct.description}
               required={true}
               ref={inputRef}
               onChange={(e) => {
-                setDescription(e.target.value);
+                setFormAddProduct((state) => {
+                  return { ...state, description: e.target.value };
+                });
               }}
             />
           </form>
@@ -185,9 +229,9 @@ function ProductList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((product, id) => (
+              {products.map((product, index) => (
                 <TableRow
-                  key={id}
+                  key={product.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell>{product.id}</TableCell>
@@ -201,11 +245,11 @@ function ProductList() {
                   <TableCell>${product.price}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell>
-                    <IconButton onClick={handleOpen}>
+                    <IconButton onClick={()=> handleOpen(index)}>
                       <EditIcon />
                     </IconButton>
                     <Modal
-                      open={open}
+                      open={index === openId}
                       onClose={handleClose}
                       closeAfterTransition
                       BackdropComponent={Backdrop}
@@ -213,22 +257,28 @@ function ProductList() {
                         timeout: 500,
                       }}
                     >
-                      <Fade in={open}>
+                      <Fade in={index === openId}>
                         <Box sx={style}>
                           <div className="form--update">
                             <Button
                               variant="outlined"
                               component="label"
                               fullWidth={true}
-                              value={image}
+                              value={form.image}
                               color="success"
                               onChange={(e) => {
-                                setImage(e.target.value);
+                                setForm((state) => {
+                                  return { ...state, image: e.target.value };
+                                });
                               }}
                             >
                               Upload
-                              <input hidden accept="image/*" type="file" />
-                              <PhotoCamera />
+                              <input
+                                hidden
+                                accept="image/*"
+                                type="file"
+                                onChange={handleImage}
+                              />
                             </Button>
                             <TextField
                               label="Name"
@@ -237,11 +287,13 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={name}
+                              value={form.name}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setName(e.target.value);
+                                setForm((state) => {
+                                  return { ...state, name: e.target.value };
+                                });
                               }}
                             />
                             <TextField
@@ -251,11 +303,13 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={categories}
+                              value={form.categories}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setCategories(e.target.value);
+                                setForm((state) => {
+                                  return { ...state, categories: e.target.value };
+                                });
                               }}
                             />
                             <TextField
@@ -265,11 +319,13 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={price}
+                              value={form.price}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setPrice(e.target.value);
+                                setForm((state) => {
+                                  return { ...state, price: e.target.value };
+                                });
                               }}
                             />
                             <TextField
@@ -279,11 +335,13 @@ function ProductList() {
                               fullWidth={true}
                               required={true}
                               ref={inputRef}
-                              value={description}
+                              value={form.description}
                               color="success"
                               className="form--update"
                               onChange={(e) => {
-                                setDescription(e.target.value);
+                                setForm((state) => {
+                                  return { ...state, description: e.target.value };
+                                });
                               }}
                             />
                           </div>

@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { getProduct } from "../../redux/productSlice";
 import { addtoCart } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: "none",
 }));
 
-function MainProduct() {
+function MainShop() {
   let products = useSelector((state) => {
     return state.product.product;
   });
@@ -37,33 +37,33 @@ function MainProduct() {
   }, [dispatch]);
 
   useEffect(() => {
-    let productClone = [...products];
+    let newProduct = [...products];
     if (searchValue !== "") {
-      productClone = productClone.filter((item) =>
+      newProduct = newProduct.filter((item) =>
         item.name.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
     if (filterValue !== "") {
       switch (filterValue) {
         case "default":
-          productClone = productClone;
+          newProduct = newProduct;
           break;
         case "ascending":
-          productClone = productClone.sort((a, b) => {
+          newProduct = newProduct.sort((a, b) => {
             return a.price - b.price;
           });
           break;
         case "descending":
-          productClone = productClone.sort((a, b) => {
+          newProduct = newProduct.sort((a, b) => {
             return b.price - a.price;
           });
           break;
         default:
-          productClone = productClone;
+          newProduct = newProduct;
           break;
       }
     }
-    setData(productClone);
+    setData(newProduct);
   }, [products, searchValue, filterValue]);
 
   const handleAddToCart = (e) => {
@@ -83,6 +83,13 @@ function MainProduct() {
           <Grid flexDirection="column" container item xs={7.5} spacing={0}>
             <Item>
               <div className="main--product__result">
+                <div className="search--product">
+                  <SearchIcon />
+                  <input
+                    type="text"
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  ></input>
+                </div>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 230 }}>
                   <Select
                     displayEmpty
@@ -141,7 +148,10 @@ function MainProduct() {
                               <span className="swiper-product-price-discount"></span>
                               <span> ${product.price} </span>
                             </div>
-                            <AddToCart product={product} onClick={handleAddToCart} />
+                            <AddToCart
+                              product={product}
+                              onClick={handleAddToCart}
+                            />
                           </div>
                         </div>
                       </div>
@@ -155,13 +165,6 @@ function MainProduct() {
             <Item>
               <div className="price--filter">
                 <div className="widget--products">
-                  <div className="search--product">
-                    <SearchIcon />
-                    <input
-                      type="text"
-                      onChange={(e) => setSearchValue(e.target.value)}
-                    ></input>
-                  </div>
                   <h4>Featured Products</h4>
                   <ul className="widget--products__list">
                     <li className="widget--products__list__item">
@@ -290,4 +293,4 @@ function MainProduct() {
   );
 }
 
-export default MainProduct;
+export default MainShop;

@@ -1,4 +1,4 @@
-import './NavbarAdmin.scss';
+import './NavbarManager.scss';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
-const NavbarAdmin = () => {
+const NavbarManager = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   let navigate = useNavigate();
 
@@ -132,4 +132,4 @@ const NavbarAdmin = () => {
     </>
   );
 };
-export default NavbarAdmin;
+export default NavbarManager;

@@ -7,7 +7,7 @@
     &__result {
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content:  space-between;
         margin-bottom: 40px;
         background-color: none !important;
         padding: -8px !important;
@@ -23,7 +23,7 @@
     &__list {
         display: flex;
         align-items: center;
-        gap: 30px;
+        gap: 40px;
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: flex-start;

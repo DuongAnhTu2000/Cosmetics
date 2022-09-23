@@ -6,9 +6,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 function Header() {
-  // const dispatch = useDispatch();
-  // const quantity = useSelector((state) => state.cart.quantity);
-  
   let countNumber = useSelector((state) => {
     return state.cart?.products[0]?.count || 0;
   });
