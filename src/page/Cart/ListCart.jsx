@@ -66,30 +66,30 @@ function ListCart() {
               {products.map((product) => (
                 <div className="cart--wrap" key={product?.id}>
                   <form>
-                    <table className="table--cart">
-                      <tbody className="product">
-                        <tr className="table--cart__items">
-                          <td
+                    <div className="table--cart">
+                      <div className="product">
+                        <div className="table--cart__items">
+                          <div
                             className="product--remove"
                             onClick={() => {
                               handleDelete(product?.id);
                             }}
                           >
                             <span className="lnr lnr-cross"></span>
-                          </td>
-                          <td className="product--image">
+                          </div>
+                          <div className="product--image">
                             <img src={product.image} alt=""></img>
-                          </td>
-                          <td className="product--name">
+                          </div>
+                          <div className="product--name">
                             <Link
                               to="/detail"
                               style={{ textDecoration: "none" }}
                             >
                               <h5>{product.name}</h5>
                             </Link>
-                          </td>
+                          </div>
                           &emsp; &emsp; &emsp;
-                          <td className="product--quantity">
+                          <div className="product--quantity">
                             <input
                               type="text"
                               name="quantity"
@@ -114,14 +114,14 @@ function ListCart() {
                             >
                               <span className="lnr lnr-chevron-up"></span>
                             </span>
-                          </td>
+                          </div>
                           &emsp; &emsp;
-                          <td className="product--total">
+                          <div className="product--total">
                             <span>${product.price}</span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </form>
                 </div>
               ))}

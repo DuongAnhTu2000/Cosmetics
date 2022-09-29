@@ -68,12 +68,10 @@ function MainShop() {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    console.log("add to cart");
     const newItem = {
       ...products,
     };
     dispatch(addtoCart(newItem));
-    console.log("them san pham ", newItem);
   };
 
   return (

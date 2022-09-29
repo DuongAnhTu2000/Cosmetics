@@ -24,8 +24,10 @@ import {
   updateProduct,
   addProduct,
 } from "../../redux/productSlice";
+import { Image } from "cloudinary-react";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -58,8 +60,31 @@ function ProductList() {
     price: "",
     description: "",
   });
-  const [avatar, setAvatar] = useState("");
   const [openId, setOpenId] = useState();
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [imageData, setImageData] = useState(null);
+
+  const uploadImage = () => {
+    const formData = new FormData();
+    formData.append("file", selectedImages);
+    formData.append("upload_preset", "dtdzzrro");
+
+    const postImage = async () => {
+      try {
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/dquozb4t1/upload",
+          formData
+        );
+        console.log(res);
+        setImageData(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    postImage();
+  };
+
   const handleOpen = (index) => {
     setForm({
       image: products[index].image,
@@ -83,11 +108,7 @@ function ProductList() {
     dispatch(getProduct());
   };
 
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    file.preview = URL.createObjectURL(file);
-    setAvatar(file);
-  };
+  const handleImage = (e) => {};
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const newProduct = {
@@ -102,8 +123,6 @@ function ProductList() {
       price: "",
       description: "",
     });
-  
-    // e.target.reset();
   };
 
   const handleUpdateProduct = (id) => {
@@ -150,6 +169,7 @@ function ProductList() {
                   return { ...state, image: e.target.value };
                 });
               }}
+              onClick={uploadImage}
             >
               Upload
               <input
@@ -157,9 +177,8 @@ function ProductList() {
                 accept="image/*"
                 name="image"
                 type="file"
-                onChange={handleImage}
+                onChange={(e) => setSelectedImages(e.target.files[0])}
               />
-              {avatar && <img src={avatar.preview} alt="" width="50%" />}
             </Button>
             <TextField
               label="Name"
@@ -238,6 +257,13 @@ function ProductList() {
                   <TableCell>
                     <div className="image--product">
                       <img src={product.image} alt=""></img>
+                      {imageData && (
+                        <Image
+                          cloudName="dquozb4t1"
+                          publicId={`https://res.cloudinary.com/dquozb4t1/image/upload/v1649427526/${imageData.public_id}`}
+                          // Replace YOUR_CLOUD_NAME with your cloudName which you can find in your Dashboard. NOTE: Your publicId link might be different.
+                        />
+                      )}
                     </div>
                   </TableCell>
                   <TableCell>{product.name}</TableCell>
@@ -245,7 +271,7 @@ function ProductList() {
                   <TableCell>${product.price}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell>
-                    <IconButton onClick={()=> handleOpen(index)}>
+                    <IconButton onClick={() => handleOpen(index)}>
                       <EditIcon />
                     </IconButton>
                     <Modal
@@ -308,7 +334,10 @@ function ProductList() {
                               className="form--update"
                               onChange={(e) => {
                                 setForm((state) => {
-                                  return { ...state, categories: e.target.value };
+                                  return {
+                                    ...state,
+                                    categories: e.target.value,
+                                  };
                                 });
                               }}
                             />
@@ -340,7 +369,10 @@ function ProductList() {
                               className="form--update"
                               onChange={(e) => {
                                 setForm((state) => {
-                                  return { ...state, description: e.target.value };
+                                  return {
+                                    ...state,
+                                    description: e.target.value,
+                                  };
                                 });
                               }}
                             />

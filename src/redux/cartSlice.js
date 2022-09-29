@@ -15,8 +15,6 @@ const cartSlice = createSlice({
   reducers: {
 
     addtoCart: (state, action) => {
-      console.log("them san pham:", action.payload)
-      console.log("state: ", state.quantity)
       let itemList = JSON.parse(localStorage.getItem('cartItems')) || []
       // check item has been exist in cart
       const matchItemIndex = itemList?.findIndex(item => item.id === action.payload.id)

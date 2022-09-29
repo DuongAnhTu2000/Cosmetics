@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 function Header() {
   let countNumber = useSelector((state) => {
-    console.log(state.cart);
     let totalCount = 0;
     state.cart.products.forEach((product) => {
       totalCount += product.count;
@@ -50,6 +49,13 @@ function Header() {
         </Link>
       </div>
       <div className="header--container__right">
+      <div className="home--header__right__wishlist">
+          <Link to="/admin"  style={{ textDecoration: "none",color: "#313529" }}>
+            <span className="header--text">
+              Admin
+            </span>
+          </Link>
+        </div>
         <ModalPage />
         <div className="navbar--home__menu">
           <div className="cart">

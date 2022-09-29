@@ -23,7 +23,7 @@ import { Lazy, Pagination, Navigation } from "swiper";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { addtoCart } from "../../redux/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const style = {
   position: "absolute",
