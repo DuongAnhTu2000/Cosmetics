@@ -38,9 +38,6 @@ const logInWithEmailAndPassword = async (email, password) => {
     try {
       var res = await signInWithEmailAndPassword(auth, email, password);
       console.log(res);
-      if (res.user.accessToken) {
-        // window.location.href = "http://localhost:3000/admin";
-      }
       resolve(res);
 
     } catch (err) {
