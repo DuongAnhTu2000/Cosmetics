@@ -1,18 +1,23 @@
-import React from "react";
-import { useState } from "react";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import Modal from "@mui/material/Modal";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "./ModalPage.scss";
+import Tab from "@mui/material/Tab";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import "./ModalPage.scss";
+import {
+  auth,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  sendPasswordReset,
+} from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const style = {
   position: "absolute",
@@ -32,57 +37,40 @@ const theme = createTheme({
 });
 
 function ModalPage() {
-  const [userData, setUserData] = useState({ username: "", password: "" });
-  const [setErrorMessage] = useState({ value: "" });
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [user, loading] = useAuthState(auth);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("1");
-  const navigate = useNavigate();
 
+  const nagivate = useNavigate();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
+  const register = () => {
+    if (!name) alert("Please enter name");
+    registerWithEmailAndPassword(name, email, password);
+  };
   useEffect(() => {
-    // console.log({ isAuth })
-    setisLoggedIn(localStorage.getItem("isAuthenticated") ? true : false);
-  }, []);
-  const logOut = () => {
-    setisLoggedIn(false);
-    localStorage.clear();
-  };
-
-  const handleInputChange = (e) => {
-    setUserData((prevState) => {
-      return {
-        ...prevState,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    //if username or password field is empty, return error message
-    if (userData.username === "" || userData.password === "") {
-      setErrorMessage(() => ({
-        value: "Empty username/password field",
-      }));
-    } else if (
-      userData.username === "admin" &&
-      userData.password === "123456"
-    ) {
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/");
-      window.location.reload();
-    } else {
-      //If credentials entered is invalid
-
-      setErrorMessage(() => ({ value: "Invalid username/password" }));
+    if (loading) {
+      return;
     }
+  }, [user, loading]);
+
+  const login = (email, password) => {
+    logInWithEmailAndPassword(email, password)
+      .then((res) => {
+        console.log("--- NAVIGATE ADMIN-----");
+        nagivate("/admin");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (
@@ -99,21 +87,10 @@ function ModalPage() {
         className="btn--login"
       >
         <div className="home--header__right__login lock ">
-          <span className="lnr lnr-lock " />
-
-          {isLoggedIn ? (
-            <> 
-            
-            <span className="header--text" onClick={logOut}>
-              Log Out
-            </span>
-            </>
-            
-          ) : (
-            <span className="header--text" onClick={handleOpen}>
-              Login
-            </span>
-          )}
+          <span className="header--text" onClick={handleOpen}>
+            <span className="lnr lnr-lock " />
+            Login
+          </span>
         </div>
       </Button>
       <Modal
@@ -160,58 +137,57 @@ function ModalPage() {
                     <span>Regostration</span>
                     <h2 className="modal-text">Login</h2>
                   </div>
-                  <form>
-                    <div className="modal--input">
+                  <div className="modal--input">
+                    <input
+                      type="text"
+                      name="username"
+                      value={email}
+                      size={37}
+                      placeholder="User Name *"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="modal--input">
+                    <input
+                      type="password"
+                      name="password"
+                      value={password}
+                      size={37}
+                      placeholder="Password *"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="modal--link">
+                    <div className="modal--link__remember">
                       <input
-                        type="text"
-                        name="username"
-                        size={37}
-                        placeholder="User Name *"
-                        onChange={(e) => handleInputChange(e)}
+                        type="checkbox"
+                        name="remember"
+                        label="Remember me"
                       />
+                      <span htmlFor="remember" className="text--remember">
+                        Remember me
+                      </span>
                     </div>
-                    <div className="modal--input">
-                      <input
-                        type="password"
-                        name="password"
-                        size={37}
-                        placeholder="Password *"
-                        onChange={(e) => handleInputChange(e)}
-                      />
+                    <Link to="/reset-password" className="forgot--password">
+                      Lost Your password?
+                    </Link>
+                  </div>
+                  <button
+                    className="button--style button--modal"
+                    onClick={() => login(email, password)}
+                  >
+                    Login
+                  </button>
+                  <div className="modal--link">
+                    <div className="modal--link__remember">
+                      <span htmlFor="remember" className="text--remember">
+                        Remember me
+                      </span>
                     </div>
-                    <div className="modal--link">
-                      <div className="modal--link__remember">
-                        <input
-                          type="checkbox"
-                          name="remember"
-                          label="Remember me"
-                        />
-                        <span htmlFor="remember" className="text--remember">
-                          Remember me
-                        </span>
-                      </div>
-                      <Link to="/reset-password" className="forgot--password">
-                        Lost Your password?
-                      </Link>
-                    </div>
-                    <button
-                      type="submit"
-                      className="button--style button--modal"
-                      onClick={handleSubmit}
-                    >
-                      Login
-                    </button>
-                    <div className="modal--link">
-                      <div className="modal--link__remember">
-                        <span htmlFor="remember" className="text--remember">
-                          Remember me
-                        </span>
-                      </div>
-                      <Link to="/#" className="forgot--password">
-                        Register now
-                      </Link>
-                    </div>
-                  </form>
+                    <Link to="/#" className="forgot--password">
+                      Register now
+                    </Link>
+                  </div>
                 </TabPanel>
                 <TabPanel value="2">
                   <div className="modal--title">
@@ -225,11 +201,15 @@ function ModalPage() {
                       size={37}
                       aria-required="true"
                       placeholder="User Name *"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                     <input
                       type="email"
                       name="email"
                       size={37}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       aria-required="true"
                       placeholder="Email *"
                     />
@@ -239,6 +219,8 @@ function ModalPage() {
                       size={37}
                       aria-required="true"
                       placeholder="Password *"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <input
                       type="password"
@@ -246,9 +228,15 @@ function ModalPage() {
                       size={37}
                       aria-required="true"
                       placeholder="Repeat Password *"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                   </div>
-                  <button type="button" className="button--style button--modal">
+                  <button
+                    type="button"
+                    className="button--style button--modal"
+                    onClick={register}
+                  >
                     Register
                   </button>
                 </TabPanel>
@@ -267,9 +255,15 @@ function ModalPage() {
                       size={37}
                       aria-required="true"
                       placeholder="User Name or Email*"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <button type="button" className="button--style button--modal">
+                  <button
+                    type="button"
+                    className="button--style button--modal"
+                    onClick={() => sendPasswordReset(email)}
+                  >
                     Reset Password
                   </button>
                 </TabPanel>

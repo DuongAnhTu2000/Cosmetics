@@ -1,21 +1,32 @@
-import './NavbarManager.scss';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-
+import "./NavbarManager.scss";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { auth, logout } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 const NavbarManager = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  let navigate = useNavigate();
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return navigate("/");
+  }, [user, loading]);
+
+  const handleLogOut = async () => {
+    await logout();
+    console.log("out", logout());
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -23,17 +34,13 @@ const NavbarManager = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const handleLogOut = () => {
-    localStorage.clear();
-    navigate("/");
-  };
 
   return (
     <>
       <AppBar position="static" color="transparent">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -48,24 +55,24 @@ const NavbarManager = () => {
                 id="menu-appbar"
                 anchorEl={anchorElNav}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
+                  vertical: "bottom",
+                  horizontal: "left",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
+                  vertical: "top",
+                  horizontal: "left",
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: 'block', md: 'none' },
+                  display: { xs: "block", md: "none" },
                 }}
               >
                 <MenuItem
                   onClick={handleCloseNavMenu}
                   sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: "block", md: "none" },
                   }}
                 >
                   <Link to="/admin" className="button--admin">
@@ -75,7 +82,7 @@ const NavbarManager = () => {
                 <MenuItem
                   onClick={handleCloseNavMenu}
                   sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: "block", md: "none" },
                   }}
                 >
                   <Link to="/product" className="button--admin">
@@ -85,7 +92,7 @@ const NavbarManager = () => {
                 <MenuItem
                   onClick={handleCloseNavMenu}
                   sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: "block", md: "none" },
                   }}
                 >
                   <Link to="/shop" className="button--admin">
@@ -103,26 +110,42 @@ const NavbarManager = () => {
                 ></img>
               </Link>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Link to="/admin" className="button--admin">
-                <Button onClick={handleCloseNavMenu} sx={{ my: 2, display: 'block' }} className="button--admin">
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, display: "block" }}
+                  className="button--admin"
+                >
                   Admin
                 </Button>
               </Link>
               <Link to="/product" className="button--admin">
-                <Button onClick={handleCloseNavMenu} sx={{ my: 2, display: 'block' }} className="button--admin">
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, display: "block" }}
+                  className="button--admin"
+                >
                   Product
                 </Button>
               </Link>
               <Link to="/shop" className="button--admin">
-                <Button onClick={handleCloseNavMenu} sx={{ my: 2, display: 'block' }} className="button--admin">
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, display: "block" }}
+                  className="button--admin"
+                >
                   Shop
                 </Button>
               </Link>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Button onClick={handleLogOut} sx={{ p: 0 }} className="button--admin">
+              <Button
+                onClick={handleLogOut}
+                sx={{ p: 0 }}
+                className="button--admin"
+              >
                 Log Out
               </Button>
             </Box>

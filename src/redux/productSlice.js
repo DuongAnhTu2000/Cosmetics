@@ -41,17 +41,6 @@ export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
   }
 });
 
-
-export const searchProduct = createAsyncThunk("search", async (name) => {
-  try {
-    const res = await axios.get(`https://625bf62850128c570209bacc.mockapi.io/product?search=shop`, name)
-    console.log(res.data);
-    return res.data;
-
-  } catch (err) {
-    console.log(err)
-  }
-});
 const productSlice = createSlice({
   name: 'product',
   initialState: {
@@ -88,14 +77,6 @@ const productSlice = createSlice({
     })
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.isFetching = true;
-    });
-
-    builder.addCase(searchProduct.pending, (state, action) => {
-      state.isFetching = false;
-    });
-    builder.addCase(searchProduct.fulfilled, (state, action) => {
-      state.isFetching = true;
-      state.product = action.payload;
     });
   }
 })

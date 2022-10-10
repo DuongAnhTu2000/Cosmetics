@@ -1,31 +1,28 @@
-import "./Admin.scss";
-import NavbarManager from "./NavbarManager";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import IconButton from "@mui/material/IconButton";
+import Modal from "@mui/material/Modal";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import Footer from "../../scss/layout/Footer";
-import {
-  getUser,
-  addUser,
-  updateUser,
-  deleteUser,
-} from "../../redux/userSlice";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  addUser, deleteUser, getUser, updateUser
+} from "../../redux/userSlice";
+import Footer from "../../scss/layout/Footer";
+import "./Admin.scss";
+import NavbarManager from "./NavbarManager";
 const style = {
   position: "absolute",
   top: "50%",
